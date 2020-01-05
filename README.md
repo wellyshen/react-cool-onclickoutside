@@ -1,6 +1,6 @@
 # React Cool Onclickoutside
 
-🚧 In progress. Milestone as below:
+🚧 In progress, **please don't use it now**. Milestone as below:
 
 - [ ] Comprehensive features
 - [ ] Unit testing
