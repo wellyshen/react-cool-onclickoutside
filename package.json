@@ -1,6 +1,6 @@
 {
   "name": "react-cool-onclickoutside",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "React hook to listen for clicks outside of the component(s).",
   "license": "MIT",
   "homepage": "https://react-cool-onclickoutside.netlify.com",
