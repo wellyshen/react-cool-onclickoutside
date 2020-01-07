@@ -9,8 +9,8 @@ import useOnclickoutside from '../useOnclickoutside';
 import { root, container, title, subtitle, menu } from './styles';
 
 const App: SFC<{}> = () => {
-  const [txt1, setTxt1] = useState('Clicked target area 1');
-  const [txt2, setTxt2] = useState('Clicked target area 2');
+  const [txt1, setTxt1] = useState('Target area 1');
+  const [txt2, setTxt2] = useState('Target area 2');
   const setRef = useOnclickoutside(() => {
     setTxt1('Clicked outside');
     setTxt2('Clicked outside');
