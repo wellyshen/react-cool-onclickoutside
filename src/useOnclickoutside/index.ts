@@ -10,8 +10,8 @@ const getOpts = (type: string): { passive: boolean } | boolean =>
   type.includes('touch') && canUsePassiveEvents() ? { passive: true } : false;
 
 export default (
-  cb: (event?: MouseEvent | TouchEvent) => void,
-  types: string[] = ['mousedown', 'touchstart']
+  callback: (event?: MouseEvent | TouchEvent) => void,
+  eventTypes: string[] = ['mousedown', 'touchstart']
 ): SetRef | void => {
   if (typeof document === 'undefined' || !document.createElement) return;
 
@@ -25,30 +25,30 @@ export default (
     e => {
       const { current } = refs;
 
-      if (!current.length || !cb) return;
+      if (!current.length || !callback) return;
       // eslint-disable-next-line no-restricted-syntax
       for (const ref of current) if (ref.contains(e.target)) return;
 
-      cb(e);
+      callback(e);
     },
-    [refs, cb]
+    [refs, callback]
   );
 
   useEffect(() => {
-    if (!cb) return;
+    if (!callback) return;
 
-    types.forEach(type => {
+    eventTypes.forEach(type => {
       document.addEventListener(type, listener, getOpts(type));
     });
 
     return (): void => {
-      types.forEach(type => {
+      eventTypes.forEach(type => {
         // @ts-ignore
         document.removeEventListener(type, listener, getOpts(type));
       });
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cb, types]);
+  }, [callback, eventTypes]);
 
   return setRef;
 };
