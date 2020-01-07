@@ -147,7 +147,8 @@
         {
           "singleQuote": true
         }
-      ]
+      ],
+      "@typescript-eslint/ban-ts-ignore": "off"
     }
   },
   "eslintIgnore": [
