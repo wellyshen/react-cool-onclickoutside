@@ -15,6 +15,7 @@ export const root = css`
 
 export const container = css`
   padding: 5rem 5%;
+  height: 1500px;
   text-align: center;
   ${mq.sm} {
     padding-left: 10%;
@@ -82,4 +83,11 @@ export const title = css`
 
 export const subtitle = css`
   margin: 0 0 2.5rem;
+`;
+
+export const menu = css`
+  padding: 1rem 0;
+  text-align: center;
+  color: white;
+  background: purple;
 `;

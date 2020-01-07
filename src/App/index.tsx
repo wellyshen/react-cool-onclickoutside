@@ -10,11 +10,14 @@ import {
   octo,
   octoArm,
   title,
-  subtitle
+  subtitle,
+  menu
 } from './styles';
 
 const App: SFC<{}> = () => {
-  const greet = useOnclickoutside();
+  const setRef = useOnclickoutside(e => {
+    console.log('LOG ===> ', e);
+  });
 
   return (
     <>
@@ -50,7 +53,12 @@ const App: SFC<{}> = () => {
           </svg>
         </a>
         <h1 css={title}>React Cool Onclickoutside</h1>
-        <p css={subtitle}>{greet}</p>
+        <p css={subtitle}>
+          React hook to listen for clicks outside of the component(s).
+        </p>
+        <div css={menu} ref={setRef}>
+          Menu
+        </div>
       </div>
     </>
   );
