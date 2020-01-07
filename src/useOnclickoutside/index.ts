@@ -12,12 +12,12 @@ const getOpts = (type: string): { passive: boolean } | boolean =>
 export default (
   callback: (event?: MouseEvent | TouchEvent) => void,
   eventTypes: string[] = ['mousedown', 'touchstart']
-): SetRef | void => {
+): SetRef => {
   if (typeof document === 'undefined' || !document.createElement) return;
 
   const refs = useRef([]);
 
-  const setRef: SetRef = useCallback((el: HTMLElement | null) => {
+  const setRef: SetRef = useCallback(el => {
     if (el) refs.current.push(el);
   }, []);
 
