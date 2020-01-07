@@ -4,6 +4,6 @@ import useOnclickoutside from '../src/useOnclickoutside';
 
 describe('useOnclickoutside', () => {
   it('should...', () => {
-    renderHook(() => useOnclickoutside());
+    renderHook(() => useOnclickoutside(() => null));
   });
 });
