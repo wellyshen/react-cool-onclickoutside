@@ -33,12 +33,14 @@ export const title = css`
 `;
 
 export const subtitle = css`
-  margin: 0 0 2.5rem;
+  margin: 0 0 5rem;
 `;
 
 export const menu = css`
+  margin-bottom: 1.5rem;
   padding: 1rem 0;
   text-align: center;
   color: white;
-  background: purple;
+  background: orange;
+  cursor: pointer;
 `;

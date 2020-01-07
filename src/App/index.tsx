@@ -1,4 +1,6 @@
-import React, { SFC } from 'react';
+/* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
+
+import React, { SFC, useState } from 'react';
 import { Global, css } from '@emotion/core';
 import normalize from 'normalize.css';
 
@@ -7,9 +9,20 @@ import useOnclickoutside from '../useOnclickoutside';
 import { root, container, title, subtitle, menu } from './styles';
 
 const App: SFC<{}> = () => {
-  const setRef = useOnclickoutside(e => {
-    console.log('LOG ===> ', e);
+  const [txt1, setTxt1] = useState('Clicked target area 1');
+  const [txt2, setTxt2] = useState('Clicked target area 2');
+  const setRef = useOnclickoutside(() => {
+    setTxt1('Clicked outside');
+    setTxt2('Clicked outside');
   });
+
+  const handleArea1 = (): void => {
+    setTxt1('Clicked target area 1');
+  };
+
+  const handleArea2 = (): void => {
+    setTxt2('Clicked target area 2');
+  };
 
   return (
     <>
@@ -25,11 +38,11 @@ const App: SFC<{}> = () => {
         <p css={subtitle}>
           React hook to listen for clicks outside of the component(s).
         </p>
-        <div css={menu} ref={setRef}>
-          Menu 1
+        <div css={menu} onClick={handleArea1} ref={setRef}>
+          {txt1}
         </div>
-        <div css={menu} ref={setRef}>
-          Menu 2
+        <div css={menu} onClick={handleArea2} ref={setRef}>
+          {txt2}
         </div>
       </div>
     </>
