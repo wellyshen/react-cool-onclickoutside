@@ -6,12 +6,12 @@ import canUsePassiveEvents from './canUsePassiveEvents';
 
 type SetRef = (el: HTMLElement | null) => void;
 
-const getOpts = (t: string): { passive: boolean } | boolean =>
-  t.includes('touch') && canUsePassiveEvents() ? { passive: true } : false;
+const getOpts = (type: string): { passive: boolean } | boolean =>
+  type.includes('touch') && canUsePassiveEvents() ? { passive: true } : false;
 
 export default (
   cb: (event?: MouseEvent | TouchEvent) => void,
-  eventTypes: string[] = ['mousedown', 'touchstart']
+  types: string[] = ['mousedown', 'touchstart']
 ): SetRef | void => {
   if (typeof document === 'undefined' || !document.createElement) return;
 
@@ -37,18 +37,18 @@ export default (
   useEffect(() => {
     if (!cb) return;
 
-    eventTypes.forEach(t => {
-      document.addEventListener(t, listener, getOpts(t));
+    types.forEach(type => {
+      document.addEventListener(type, listener, getOpts(type));
     });
 
     return (): void => {
-      eventTypes.forEach(t => {
+      types.forEach(type => {
         // @ts-ignore
-        document.removeEventListener(t, listener, getOpts(t));
+        document.removeEventListener(type, listener, getOpts(type));
       });
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cb, eventTypes]);
+  }, [cb, types]);
 
   return setRef;
 };
