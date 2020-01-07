@@ -1,45 +1,54 @@
 /* eslint-disable consistent-return */
 
-import { RefObject, useRef, useCallback, useEffect } from 'react';
+import { useRef, useCallback, useEffect } from 'react';
 
 import canUsePassiveEvents from './canUsePassiveEvents';
 
-const getOptions = (t: string): { passive: boolean } | boolean =>
+type SetRef = (el: HTMLElement | null) => void;
+
+const getOpts = (t: string): { passive: boolean } | boolean =>
   t.includes('touch') && canUsePassiveEvents() ? { passive: true } : false;
 
 export default (
   cb: (event?: MouseEvent | TouchEvent) => void,
   eventTypes: string[] = ['mousedown', 'touchstart']
-): RefObject<HTMLElement | null> | void => {
+): SetRef | void => {
   if (typeof document === 'undefined' || !document.createElement) return;
 
-  const ref = useRef();
+  const refs = useRef([]);
+
+  const setRef: SetRef = useCallback((el: HTMLElement | null) => {
+    if (el) refs.current.push(el);
+  }, []);
 
   const listener = useCallback(
     e => {
-      const { current } = ref;
+      const { current } = refs;
 
-      // @ts-ignore
-      if (current && !current.contains(e.target) && cb) cb(e);
+      if (!current.length || !cb) return;
+      // eslint-disable-next-line no-restricted-syntax
+      for (const ref of current) if (ref.contains(e.target)) return;
+
+      cb(e);
     },
-    [ref, cb]
+    [refs, cb]
   );
 
   useEffect(() => {
     if (!cb) return;
 
     eventTypes.forEach(t => {
-      document.addEventListener(t, listener, getOptions(t));
+      document.addEventListener(t, listener, getOpts(t));
     });
 
     return (): void => {
       eventTypes.forEach(t => {
         // @ts-ignore
-        document.removeEventListener(t, listener, getOptions(t));
+        document.removeEventListener(t, listener, getOpts(t));
       });
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cb, eventTypes]);
 
-  return ref;
+  return setRef;
 };

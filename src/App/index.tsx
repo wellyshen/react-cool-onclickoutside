@@ -57,7 +57,10 @@ const App: SFC<{}> = () => {
           React hook to listen for clicks outside of the component(s).
         </p>
         <div css={menu} ref={setRef}>
-          Menu
+          Menu 1
+        </div>
+        <div css={menu} ref={setRef}>
+          Menu 2
         </div>
       </div>
     </>
