@@ -11,10 +11,13 @@ import { root, container, title, subtitle, menu } from './styles';
 const App: SFC<{}> = () => {
   const [txt1, setTxt1] = useState('Target area 1');
   const [txt2, setTxt2] = useState('Target area 2');
-  const setRef = useOnclickoutside(() => {
-    setTxt1('Clicked outside');
-    setTxt2('Clicked outside');
-  });
+  const setRef = useOnclickoutside(
+    () => {
+      setTxt1('Clicked outside');
+      setTxt2('Clicked outside');
+    },
+    { excludeScrollbar: true }
+  );
 
   const handleArea1 = (): void => {
     setTxt1('Clicked target area 1');
