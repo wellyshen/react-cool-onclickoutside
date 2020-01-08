@@ -107,3 +107,7 @@ The `options` object may contain the following keys.
 ### Return
 
 A function to register the component(s) that `useOnclickoutside` hook should target to.
+
+## Inspiration
+
+- [react-onclickoutside](https://github.com/Pomax/react-onclickoutside)
