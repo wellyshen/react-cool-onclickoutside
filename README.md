@@ -40,7 +40,7 @@ import useOnclickoutside from 'react-cool-onclickoutside';
 
 const Dropdown = () => {
   const [openMenu, setOpenMenu] = useState(false);
-  const rigisterRef = useOnclickoutside(() => {
+  const registerRef = useOnclickoutside(() => {
     setOpenMenu(false);
   });
 
@@ -51,7 +51,7 @@ const Dropdown = () => {
   return (
     <div>
       <div onClick={handleClickBtn}>Button</div>
-      {openMenu && <div ref={rigisterRef}>Menu</div>}
+      {openMenu && <div ref={registerRef}>Menu</div>}
     </div>
   );
 };
@@ -64,7 +64,7 @@ import useOnclickoutside from 'react-cool-onclickoutside';
 
 const App = () => {
   const [showTips, setShowTips] = useState(true);
-  const rigisterRef = useOnclickoutside(() => {
+  const registerRef = useOnclickoutside(() => {
     setShowTips(false);
   });
 
@@ -72,8 +72,8 @@ const App = () => {
     <div>
       {showTips && (
         <>
-          <Tooltip ref={rigisterRef} />
-          <Tooltip ref={rigisterRef} />
+          <Tooltip ref={registerRef} />
+          <Tooltip ref={registerRef} />
         </>
       )}
     </div>
@@ -84,7 +84,7 @@ const App = () => {
 ## API
 
 ```js
-const rigisterRef = useOnclickoutside(callback[, options]);
+const registerRef = useOnclickoutside(callback[, options]);
 ```
 
 ### Parameters
