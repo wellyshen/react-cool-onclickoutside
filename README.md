@@ -56,6 +56,9 @@ const App = () => {
 ```js
 type UseOnclickoutside = (
   callback: (event?: MouseEvent | TouchEvent) => void,
-  eventTypes: string[] = ['mousedown', 'touchstart']
+  {
+    eventTypes = ['mousedown', 'touchstart'],
+    excludeScrollbar = false
+  }: { eventTypes: string[]; excludeScrollbar: boolean }
 ): (el: HTMLElement | null) => void
 ```
