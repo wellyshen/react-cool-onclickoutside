@@ -1,26 +1,27 @@
-/* eslint-disable consistent-return */
-
 import { useRef, useCallback, useEffect } from 'react';
 
 import canUsePassiveEvents from './canUsePassiveEvents';
 
+type Callback = (event?: MouseEvent | TouchEvent) => void;
+type Options = { eventTypes?: string[]; excludeScrollbar?: boolean };
 type SetRef = (el: HTMLElement | null) => void;
 
 const clickedOnScrollbar = (e: MouseEvent): boolean =>
   document.documentElement.clientWidth <= e.clientX ||
   document.documentElement.clientHeight <= e.clientY;
 
-const getOptions = (type: string): { passive: boolean } | boolean =>
+const getEventOptions = (type: string): { passive: boolean } | boolean =>
   type.includes('touch') && canUsePassiveEvents() ? { passive: true } : false;
 
 export default (
-  callback: (event?: MouseEvent | TouchEvent) => void,
+  callback: Callback,
   {
     eventTypes = ['mousedown', 'touchstart'],
     excludeScrollbar = false
-  }: { eventTypes: string[]; excludeScrollbar: boolean }
+  }: Options = {}
 ): SetRef => {
-  if (typeof document === 'undefined' || !document.createElement) return;
+  if (typeof document === 'undefined' || !document.createElement)
+    return (): void => null;
 
   const refs = useRef([]);
 
@@ -43,16 +44,16 @@ export default (
   );
 
   useEffect(() => {
-    if (!callback) return;
+    if (!callback) return (): void => null;
 
     eventTypes.forEach(type => {
-      document.addEventListener(type, listener, getOptions(type));
+      document.addEventListener(type, listener, getEventOptions(type));
     });
 
     return (): void => {
       eventTypes.forEach(type => {
         // @ts-ignore
-        document.removeEventListener(type, listener, getOptions(type));
+        document.removeEventListener(type, listener, getEventOptions(type));
       });
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
