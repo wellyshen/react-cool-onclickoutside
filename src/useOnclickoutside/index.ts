@@ -2,9 +2,18 @@ import { useRef, useCallback, useEffect } from 'react';
 
 import canUsePassiveEvents from './canUsePassiveEvents';
 
-type Callback = (event?: MouseEvent | TouchEvent) => void;
-type Options = { eventTypes?: string[]; excludeScrollbar?: boolean };
-type SetRef = (el: HTMLElement | null) => void;
+export interface Callback {
+  (event?: MouseEvent | TouchEvent): void;
+}
+export type EventTypes = string[];
+export type ExcludeScrollbar = boolean;
+interface Options {
+  eventTypes?: EventTypes;
+  excludeScrollbar?: ExcludeScrollbar;
+}
+interface SetRef {
+  (el: HTMLElement | null): void;
+}
 
 const clickedOnScrollbar = (e: MouseEvent): boolean =>
   document.documentElement.clientWidth <= e.clientX ||
