@@ -99,10 +99,10 @@ const callback = event => {
 
 The `options` object may contain the following keys.
 
-| Key                | Type    | Default                       | Description                                            |
-| ------------------ | ------- | ----------------------------- | ------------------------------------------------------ |
-| `eventTypes`       | Array   | `['mousedown', 'touchstart']` | Which events to listen for.                            |
-| `excludeScrollbar` | boolean | `false`                       | Whether or not to listen (ignore) to scrollbar clicks. |
+| Key                | Type    | Default                       | Description                                                    |
+| ------------------ | ------- | ----------------------------- | -------------------------------------------------------------- |
+| `eventTypes`       | Array   | `['mousedown', 'touchstart']` | Which events to listen for.                                    |
+| `excludeScrollbar` | boolean | `false`                       | Whether or not to listen (ignore) to browser scrollbar clicks. |
 
 ### Return
 
