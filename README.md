@@ -11,7 +11,7 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 - [x] Support multiple refs
 - [x] Ignore callback triggered by clicks browser scrollbar
 - [ ] Unit testing
-- [ ] Typescript type definition
+- [x] Typescript type definition
 - [ ] Demo website
 - [ ] Demo code
 - [ ] CI/CD
