@@ -1,9 +1,13 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook, act } from '@testing-library/react-hooks';
 
 import useOnclickoutside from '../src/useOnclickoutside';
 
 describe('useOnclickoutside', () => {
   it('should...', () => {
-    renderHook(() => useOnclickoutside(() => null));
+    const { result } = renderHook(() => useOnclickoutside(() => null));
+
+    act(() => {
+      result.current(document.createElement('div'));
+    });
   });
 });
