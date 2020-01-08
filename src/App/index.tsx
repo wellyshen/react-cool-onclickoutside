@@ -14,8 +14,6 @@ const App: SFC<{}> = () => {
   const setRef = useOnclickoutside(() => {
     setTxt1('Clicked outside');
     setTxt2('Clicked outside');
-
-    console.log('LOG ===> ', Math.random());
   });
 
   const handleArea1 = (): void => {

@@ -1,6 +1,6 @@
 # React Cool Onclickoutside
 
-This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook) to execute callback when user clicks outside of the target component(s) area. It's a useful logic for UI interaction design (IxD) like hide a dropdown menu or tooltip etc. Hop you guys ❤️ it!
+This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook) to execute callback when user clicks outside of the target component(s) area. It's a useful logic for UI interaction design (IxD) like dismiss a dropdown menu, modal or tooltip etc. Hop you guys ❤️ it!
 
 ⚡️ Live demo: https://react-cool-onclickoutside.netlify.com
 
@@ -24,11 +24,11 @@ General use case.
 import useOnclickoutside from 'react-use-onclickoutside';
 
 const App = () => {
-  const ref = useOnclickoutside(() => {
-    // Handle outside clicked...
+  const rigisterRef = useOnclickoutside(() => {
+    // Dismiss modal
   });
 
-  return <div ref={ref}>{'Dropdown'}</div>;
+  return <div ref={rigisterRef}>{'Modal'}</div>;
 };
 ```
 
@@ -38,14 +38,14 @@ Support multiple refs. Callback only be triggered when user clicks outside of bo
 import useOnclickoutside from 'react-use-onclickoutside';
 
 const App = () => {
-  const ref = useOnclickoutside(() => {
-    // Handle outside clicked...
+  const rigisterRef = useOnclickoutside(() => {
+    // Dismiss all tooltips
   });
 
   return (
     <>
-      <div ref={ref}>{'Dropdown 1'}</div>
-      <div ref={ref}>{'Dropdown 2'}</div>
+      <div ref={rigisterRef}>{'Tooltip 1'}</div>
+      <div ref={rigisterRef}>{'Tooltip 2'}</div>
     </>
   );
 };
