@@ -9,7 +9,7 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 - [x] Triggers callback when clicks outside target area
 - [x] Uses passive touch event listener to improve scrolling performance
 - [x] Support multiple refs
-- [x] Clicks on the scrollbar can be ignored
+- [x] Ignore callback triggered by clicks browser scrollbar
 - [ ] Unit testing
 - [ ] Typescript type definition
 - [ ] Demo website
