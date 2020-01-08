@@ -12,9 +12,9 @@ export default (): boolean => {
       passive = true;
     }
   });
-
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   const noop = (): void => {};
+
   window.addEventListener('test', noop, options);
   window.removeEventListener('test', noop, options);
 
