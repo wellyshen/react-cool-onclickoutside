@@ -7,7 +7,7 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 > 🚧 This package is still under development, API may changed frequently. **Please don't use it now ✋🏼**. The milestone as below:
 
 - [x] Triggers callback when clicks outside target area
-- [x] Uses passive touch event listener to improve scrolling performance
+- [x] Use passive touch event listener to improve scrolling performance
 - [x] Support multiple refs
 - [x] Ignore callback triggered by clicks browser scrollbar
 - [ ] Unit testing
