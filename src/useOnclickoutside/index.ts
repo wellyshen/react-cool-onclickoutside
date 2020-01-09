@@ -10,7 +10,7 @@ interface Options {
   eventTypes?: EventTypes;
   excludeScrollbar?: ExcludeScrollbar;
 }
-interface Callback {
+export interface Callback {
   (event?: MouseEvent | TouchEvent): void;
 }
 interface SetRef {
