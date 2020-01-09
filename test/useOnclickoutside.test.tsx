@@ -2,16 +2,10 @@ import React, { SFC } from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 
-import useOnclickoutside, {
-  Callback,
-  EventTypes,
-  ExcludeScrollbar
-} from '../src/useOnclickoutside';
+import useOnclickoutside, { Callback, Options } from '../src/useOnclickoutside';
 
-interface Props {
+interface Props extends Options {
   callback: Callback;
-  eventTypes?: EventTypes;
-  excludeScrollbar?: ExcludeScrollbar;
 }
 
 const Compo: SFC<Props> = ({
@@ -33,10 +27,6 @@ const Compo: SFC<Props> = ({
 };
 
 describe('useOnclickoutside', () => {
-  interface Params {
-    eventTypes?: EventTypes;
-    excludeScrollbar?: ExcludeScrollbar;
-  }
   interface Return {
     cb: Function;
     getByTestId: Function;
@@ -45,7 +35,7 @@ describe('useOnclickoutside', () => {
   const renderHelper = ({
     eventTypes = ['mousedown', 'touchstart'],
     excludeScrollbar = false
-  }: Params = {}): Return => {
+  }: Options = {}): Return => {
     const cb = jest.fn();
     const { getByTestId } = render(
       <Compo

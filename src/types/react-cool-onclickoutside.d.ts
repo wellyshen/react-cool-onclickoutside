@@ -12,10 +12,7 @@ declare module 'react-cool-onclickoutside' {
     (el: HTMLElement | null): void;
   }
 
-  const useOnclickoutside: (
-    callback: Callback,
-    { eventTypes, excludeScrollbar }?: Options
-  ) => SetRef;
+  const useOnclickoutside: (callback: Callback, options?: Options) => SetRef;
 
   export default useOnclickoutside;
 }
