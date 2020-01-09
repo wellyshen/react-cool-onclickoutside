@@ -1,5 +1,6 @@
 import React, { SFC } from 'react';
 import { render, fireEvent } from '@testing-library/react';
+import { renderHook } from '@testing-library/react-hooks';
 
 import useOnclickoutside, {
   Callback,
@@ -13,7 +14,7 @@ interface Props {
   excludeScrollbar?: ExcludeScrollbar;
 }
 
-const WrapCompo: SFC<Props> = ({
+const Compo: SFC<Props> = ({
   callback,
   eventTypes,
   excludeScrollbar
@@ -24,33 +25,33 @@ const WrapCompo: SFC<Props> = ({
   });
 
   return (
-    <div data-testid="container">
+    <>
       <div data-testid="ref-1" ref={registerRef} />
       <div data-testid="ref-2" ref={registerRef} />
-    </div>
+    </>
   );
 };
 
 describe('useOnclickoutside', () => {
   interface Params {
-    types?: EventTypes;
-    scrollbar?: ExcludeScrollbar;
+    eventTypes?: EventTypes;
+    excludeScrollbar?: ExcludeScrollbar;
   }
   interface Return {
     cb: Function;
     getByTestId: Function;
   }
 
-  const renderCompo = ({
-    types = ['mousedown', 'touchstart'],
-    scrollbar = false
+  const renderHelper = ({
+    eventTypes = ['mousedown', 'touchstart'],
+    excludeScrollbar = false
   }: Params = {}): Return => {
     const cb = jest.fn();
     const { getByTestId } = render(
-      <WrapCompo
+      <Compo
         callback={cb}
-        eventTypes={types}
-        excludeScrollbar={scrollbar}
+        eventTypes={eventTypes}
+        excludeScrollbar={excludeScrollbar}
       />
     );
 
@@ -58,7 +59,12 @@ describe('useOnclickoutside', () => {
   };
 
   it('should not trigger callback when clicks (touches) inside of the target refs', () => {
-    const { cb, getByTestId } = renderCompo();
+    Object.defineProperties(window.HTMLHtmlElement.prototype, {
+      clientWidth: { value: 100 },
+      clientHeight: { value: 100 }
+    });
+
+    const { cb, getByTestId } = renderHelper();
     const ref1 = getByTestId('ref-1');
     const ref2 = getByTestId('ref-2');
 
@@ -74,28 +80,49 @@ describe('useOnclickoutside', () => {
   });
 
   it('should trigger callback when clicks outside (touches) of the target refs', () => {
-    const { cb, getByTestId } = renderCompo();
-    const container = getByTestId('container');
+    const { cb } = renderHelper();
 
-    fireEvent.mouseDown(container);
-    fireEvent.touchStart(container);
+    fireEvent.mouseDown(document);
+    fireEvent.touchStart(document);
 
     expect(cb).toBeCalledTimes(2);
   });
 
   it('should trigger callback by the assign event type', () => {
-    const { cb, getByTestId } = renderCompo({ types: ['mouseup'] });
-    const container = getByTestId('container');
+    const { cb } = renderHelper({ eventTypes: ['mouseup'] });
 
-    fireEvent.mouseDown(container);
+    fireEvent.mouseDown(document);
 
     expect(cb).not.toBeCalled();
 
-    fireEvent.mouseUp(container);
+    fireEvent.mouseUp(document);
 
     expect(cb).toBeCalled();
   });
 
-  it.todo('ssr');
-  it.todo('ignore scrollbar clicks');
+  it('should not trigger callback when clicks inside of the scrollbar', () => {
+    const { cb } = renderHelper({ excludeScrollbar: true });
+
+    fireEvent.mouseDown(document, { clientX: 110 });
+    fireEvent.mouseDown(document, { clientY: 110 });
+
+    expect(cb).not.toBeCalled();
+  });
+
+  it('should trigger callback when clicks outside of the scrollbar', () => {
+    const { cb } = renderHelper({ excludeScrollbar: true });
+
+    fireEvent.mouseDown(document, { clientX: 90 });
+    fireEvent.mouseDown(document, { clientY: 90 });
+
+    expect(cb).toBeCalledTimes(2);
+  });
+
+  it('should return null from the beginning in ssr', () => {
+    document.createElement = null;
+
+    const { result } = renderHook(() => useOnclickoutside(() => null));
+
+    expect(result.current).toBeNull();
+  });
 });
