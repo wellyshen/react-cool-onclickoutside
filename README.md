@@ -1,8 +1,10 @@
 # React Cool Onclickoutside
 
-This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook) to trigger callback when user clicks outside of the target component(s) area. It's a useful logic for UI interaction design (IxD) like dismiss a dropdown menu, modal or tooltip etc. Hop you guys ❤️ it!
+This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook) to trigger callback when user clicks outside of the target component(s) area. It's a useful logic for UI interaction design (IxD) like dismiss a dropdown menu, modal or tooltip etc. You can explore the [features](#features) section to learn more.
 
 ⚡️ Live demo: https://react-cool-onclickoutside.netlify.com
+
+❤️ it? ⭐️ it on [GitHub](https://github.com/wellyshen/react-cool-onclickoutside/stargazers) or [Tweet](https://twitter.com/intent/tweet?text=With%20@react-cool-onclickoutside,%20I%20can%20build%20UI%20components%20efficiently.%20Thanks,%20@Welly%20Shen%20🤩) about it.
 
 [![build status](https://img.shields.io/travis/wellyshen/react-cool-onclickoutside/master?style=flat-square)](https://travis-ci.org/wellyshen/react-cool-onclickoutside)
 [![coverage status](https://img.shields.io/coveralls/github/wellyshen/react-cool-onclickoutside?style=flat-square)](https://coveralls.io/github/wellyshen/react-cool-onclickoutside?branch=master)
@@ -13,11 +15,11 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 [![MIT licensed](https://img.shields.io/github/license/wellyshen/react-cool-onclickoutside?style=flat-square)](https://raw.githubusercontent.com/wellyshen/react-cool-onclickoutside/master/LICENSE)
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange?style=flat-square)](#contributors-)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](https://github.com/wellyshen/react-cool-onclickoutside/blob/master/CONTRIBUTING.md)
-[![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fwellyshen%2Freact-cool-onclickoutside)](https://twitter.com/intent/tweet?text=With%20@react-cool-onclickoutside,%20I%20can%20build%20components%20efficiently.%20Thanks,%20@Welly%20Shen%20🤩)
+[![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fwellyshen%2Freact-cool-onclickoutside)](https://twitter.com/intent/tweet?text=With%20@react-cool-onclickoutside,%20I%20can%20build%20UI%20components%20efficiently.%20Thanks,%20@Welly%20Shen%20🤩)
 
 ## Features
 
-- 🎣 Listen for clicks outside based on React hook.
+- 🎣 Listen for clicks outside based on React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook).
 - 👯‍♀️ Support multiple [refs](https://reactjs.org/docs/refs-and-the-dom.html) to cover more use cases.
 - 🧻 Uses [passive event listeners](https://developers.google.com/web/tools/lighthouse/audits/passive-event-listeners) to improve scrolling performance.
 - ⛔️ Scrollbar can be excluded from clicks outside callback.
