@@ -67,7 +67,7 @@ const Dropdown = () => {
 };
 ```
 
-Support multiple refs. Callback only be triggered when user clicks outside of both.
+Support multiple refs. Callback only be triggered when user clicks outside of the registered components.
 
 ```js
 import useOnclickoutside from 'react-cool-onclickoutside';
