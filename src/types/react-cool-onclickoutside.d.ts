@@ -1,14 +1,21 @@
 declare module 'react-cool-onclickoutside' {
-  export interface Callback {
+  interface Callback {
     (event?: MouseEvent | TouchEvent): void;
   }
 
-  export interface Options {
+  interface Options {
     eventTypes?: string[];
     excludeScrollbar?: boolean;
   }
 
-  export interface SetRef {
+  interface SetRef {
     (el: HTMLElement | null): void;
   }
+
+  const useOnclickoutside: (
+    callback: Callback,
+    { eventTypes, excludeScrollbar }?: Options
+  ) => SetRef;
+
+  export default useOnclickoutside;
 }
