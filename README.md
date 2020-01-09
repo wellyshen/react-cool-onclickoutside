@@ -4,18 +4,24 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 
 ⚡️ Live demo: https://react-cool-onclickoutside.netlify.com
 
-> 🚧 This package is still under development, API may changed frequently. **Please don't use it now ✋🏼**. The milestone as below:
+[![build status](https://img.shields.io/travis/wellyshen/react-cool-onclickoutside/master?style=flat-square)](https://travis-ci.org/wellyshen/react-cool-onclickoutside)
+[![coverage status](https://img.shields.io/coveralls/github/wellyshen/react-cool-onclickoutside?style=flat-square)](https://coveralls.io/github/wellyshen/react-cool-onclickoutside?branch=master)
+[![npm version](https://img.shields.io/npm/v/react-cool-onclickoutside?style=flat-square)](https://www.npmjs.com/package/react-cool-onclickoutside)
+[![npm downloads](https://img.shields.io/npm/dm/react-cool-onclickoutside?style=flat-square)](https://www.npmtrends.com/react-cool-onclickoutside)
+[![npm downloads](https://img.shields.io/npm/dt/react-cool-onclickoutside?style=flat-square)](https://www.npmtrends.com/react-cool-onclickoutside)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-cool-onclickoutside?style=flat-square)](https://bundlephobia.com/result?p=react-cool-onclickoutside)
+[![MIT licensed](https://img.shields.io/github/license/wellyshen/react-cool-onclickoutside?style=flat-square)](https://raw.githubusercontent.com/wellyshen/react-cool-onclickoutside/master/LICENSE)
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange?style=flat-square)](#contributors-)
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](https://github.com/wellyshen/react-cool-onclickoutside/blob/master/CONTRIBUTING.md)
+[![Twitter URL](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fwellyshen%2Freact-cool-onclickoutside)](https://twitter.com/intent/tweet?text=With%20@react-cool-onclickoutside,%20I%20can%20build%20components%20efficiently.%20Thanks,%20@Welly%20Shen%20🤩)
 
-- [x] Triggers callback when clicks outside target area
-- [x] Use passive touch event listener to improve scrolling performance
-- [x] Support multiple refs
-- [x] Ignore callback triggered by clicks browser scrollbar
-- [ ] Unit testing
-- [x] Typescript type definition
-- [ ] Demo website
-- [ ] Demo code
-- [ ] CI/CD
-- [ ] Documentation
+## Features
+
+- 🎣 Listen for clicks outside based on React hook.
+- 👯‍♀️ Support multiple [refs](https://reactjs.org/docs/refs-and-the-dom.html) to cover more use cases.
+- 🧻 Use [passive event listeners](https://developers.google.com/web/tools/lighthouse/audits/passive-event-listeners) to improve scrolling performance.
+- 📜 Support [TypeScript](https://www.typescriptlang.org) type definition.
+- 🦠 Tiny size ([~ 741B gzipped](https://bundlephobia.com/result?p=react-cool-onclickoutside)). No external dependencies, aside for the `react`.
 
 ## Requirement
 
@@ -111,3 +117,21 @@ A function to register the component(s) that `useOnclickoutside` hook should tar
 ## Inspiration
 
 - [react-onclickoutside](https://github.com/Pomax/react-onclickoutside)
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://www.linkedin.com/in/welly-shen-8b43287a/"><img src="https://avatars1.githubusercontent.com/u/21308003?v=4" width="100px;" alt=""/><br /><sub><b>Welly</b></sub></a><br /><a href="https://github.com/wellyshen/react-cool-onclickoutside/commits?author=wellyshen" title="Code">💻</a> <a href="https://github.com/wellyshen/react-cool-onclickoutside/commits?author=wellyshen" title="Documentation">📖</a> <a href="#maintenance-wellyshen" title="Maintenance">🚧</a></td>
+  </tr>
+</table>
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
