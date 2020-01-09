@@ -19,8 +19,10 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 
 - 🎣 Listen for clicks outside based on React hook.
 - 👯‍♀️ Support multiple [refs](https://reactjs.org/docs/refs-and-the-dom.html) to cover more use cases.
-- 🧻 Use [passive event listeners](https://developers.google.com/web/tools/lighthouse/audits/passive-event-listeners) to improve scrolling performance.
+- 🧻 Uses [passive event listeners](https://developers.google.com/web/tools/lighthouse/audits/passive-event-listeners) to improve scrolling performance.
+- ⛔️ Scrollbar can be excluded from clicks outside callback.
 - 📜 Support [TypeScript](https://www.typescriptlang.org) type definition.
+- 🗄️ Server-side rendering friendly.
 - 🦠 Tiny size ([~ 741B gzipped](https://bundlephobia.com/result?p=react-cool-onclickoutside)). No external dependencies, aside for the `react`.
 
 ## Requirement
