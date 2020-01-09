@@ -1,18 +1,23 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+
 import { useRef, useCallback, useEffect } from 'react';
 
 import canUsePassiveEvents from './canUsePassiveEvents';
 
-export interface Callback {
-  (event?: MouseEvent | TouchEvent): void;
-}
 export type EventTypes = string[];
 export type ExcludeScrollbar = boolean;
 interface Options {
   eventTypes?: EventTypes;
   excludeScrollbar?: ExcludeScrollbar;
 }
+interface Callback {
+  (event?: MouseEvent | TouchEvent): void;
+}
 interface SetRef {
   (el: HTMLElement | null): void;
+}
+interface UseOnclickoutside {
+  (callback: Callback, { eventTypes, excludeScrollbar }?: Options): SetRef;
 }
 
 const clickedOnScrollbar = (e: MouseEvent): boolean =>
@@ -22,13 +27,10 @@ const clickedOnScrollbar = (e: MouseEvent): boolean =>
 const getEventOptions = (type: string): { passive: boolean } | boolean =>
   type.includes('touch') && canUsePassiveEvents() ? { passive: true } : false;
 
-export default (
-  callback: Callback,
-  {
-    eventTypes = ['mousedown', 'touchstart'],
-    excludeScrollbar = false
-  }: Options = {}
-): SetRef => {
+const useOnclickoutside: UseOnclickoutside = (
+  callback,
+  { eventTypes = ['mousedown', 'touchstart'], excludeScrollbar = false } = {}
+) => {
   if (typeof document === 'undefined' || !document.createElement)
     return (): void => null;
 
@@ -70,3 +72,5 @@ export default (
 
   return setRef;
 };
+
+export default useOnclickoutside;
