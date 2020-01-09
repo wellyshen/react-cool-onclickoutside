@@ -22,6 +22,7 @@
     "click-outside",
     "multiple-refs",
     "passive-event-listeners",
+    "exclude-scrollbar",
     "typescript"
   ],
   "author": "Welly Shen <hivoid19@gmail.com> (https://github.com/wellyshen)",
