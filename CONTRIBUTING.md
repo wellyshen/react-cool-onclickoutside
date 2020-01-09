@@ -31,7 +31,6 @@ After cloning React Cool Onclickoutside, run `yarn` to fetch its dependencies. T
 - `yarn test` runs the complete test suite
 - `yarn test:watch` runs an interactive test watcher (helpful in development)
 - `yarn test:cov` runs the complete test suite with coverage report
-- `yarn test:update` updates the [Jest snapshots](https://github.com/wellyshen/react-cool-onclickoutside/tree/master/test/__snapshots__)
 - `yarn build:demo` creates an `demo` folder with all the static files
 - `yarn build:dist` creates a `dist` folder with package builds (`CJS` & `ESM`) and type definition file. You can test the package locally via [yarn link](https://yarnpkg.com/lang/en/docs/cli/link)
 - `yarn build` creates both `demo` and `dist`
