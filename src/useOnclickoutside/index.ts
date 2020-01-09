@@ -31,8 +31,7 @@ const useOnclickoutside: UseOnclickoutside = (
   callback,
   { eventTypes = ['mousedown', 'touchstart'], excludeScrollbar = false } = {}
 ) => {
-  if (typeof document === 'undefined' || !document.createElement)
-    return (): void => null;
+  if (typeof document === 'undefined' || !document.createElement) return null;
 
   const refs = useRef([]);
 
@@ -55,7 +54,7 @@ const useOnclickoutside: UseOnclickoutside = (
   );
 
   useEffect(() => {
-    if (!callback) return (): void => null;
+    if (!callback) return null;
 
     eventTypes.forEach(type => {
       document.addEventListener(type, listener, getEventOptions(type));
