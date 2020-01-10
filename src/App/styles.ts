@@ -11,8 +11,7 @@ export const root = css`
 `;
 
 export const container = css`
-  padding: 5rem 5%;
-  height: 1500px;
+  padding: 7rem 5%;
   text-align: center;
   ${sm} {
     padding-left: 10%;
@@ -33,14 +32,63 @@ export const title = css`
 `;
 
 export const subtitle = css`
-  margin: 0 0 5rem;
+  margin: 0 0 3.5rem;
 `;
 
-export const menu = css`
-  margin-bottom: 1.5rem;
-  padding: 1rem 0;
-  text-align: center;
-  color: white;
-  background: orange;
+export const dropdown = css`
+  display: inline-block;
+  position: relative;
+  user-select: none;
+`;
+
+export const dropdownBtn = css`
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  border-color: #6c757d;
+  color: #fff;
+  background: #6c757d;
+  line-height: 1.5;
   cursor: pointer;
+  &:hover {
+    border-color: #5a6268;
+    background: #5a6268;
+  }
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(130, 138, 145, 0.5);
+  }
+  &::after {
+    content: '';
+    display: inline-block;
+    margin-left: 0.5rem;
+    vertical-align: 0.25rem;
+    border-top: 0.3rem solid;
+    border-right: 0.3rem solid transparent;
+    border-bottom: 0;
+    border-left: 0.3rem solid transparent;
+  }
+`;
+
+export const dropdownMenu = css`
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  padding: 0.5rem 0;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+  text-align: left;
+  transform: translate3d(0, 40px, 0);
+  cursor: pointer;
+`;
+
+export const dropdownItem = css`
+  display: block;
+  padding: 0.25rem 1.5rem;
+  color: #212529;
+  line-height: 1.5;
+  text-decoration: none;
+  &:hover {
+    background: #f8f9fa;
+  }
 `;

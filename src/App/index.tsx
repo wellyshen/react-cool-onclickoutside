@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions, jsx-a11y/anchor-is-valid */
 
 import React, { SFC, useState } from 'react';
 import { Global, css } from '@emotion/core';
@@ -6,26 +6,31 @@ import normalize from 'normalize.css';
 
 import GitHubCorner from '../GitHubCorner';
 import useOnclickoutside from '../useOnclickoutside';
-import { root, container, title, subtitle, menu } from './styles';
+import {
+  root,
+  container,
+  title,
+  subtitle,
+  dropdown,
+  dropdownBtn,
+  dropdownMenu,
+  dropdownItem
+} from './styles';
 
 const App: SFC<{}> = () => {
-  const [txt1, setTxt1] = useState('Target area 1');
-  const [txt2, setTxt2] = useState('Target area 2');
-  const setRef = useOnclickoutside(
-    () => {
-      setTxt1('Clicked outside');
-      setTxt2('Clicked outside');
-    },
-    { excludeScrollbar: true }
-  );
+  const [openMenu, setOpenMenu] = useState(false);
 
-  const handleArea1 = (): void => {
-    setTxt1('Clicked target area 1');
+  const handleBtnClick = (): void => {
+    setOpenMenu(true);
   };
 
-  const handleArea2 = (): void => {
-    setTxt2('Clicked target area 2');
+  const closeMenu = (): void => {
+    setOpenMenu(false);
   };
+
+  const setRef = useOnclickoutside(() => {
+    closeMenu();
+  });
 
   return (
     <>
@@ -41,11 +46,23 @@ const App: SFC<{}> = () => {
         <p css={subtitle}>
           React hook to listen for clicks outside of the component(s).
         </p>
-        <div css={menu} onClick={handleArea1} ref={setRef}>
-          {txt1}
-        </div>
-        <div css={menu} onClick={handleArea2} ref={setRef}>
-          {txt2}
+        <div css={dropdown} ref={setRef}>
+          <button css={dropdownBtn} onClick={handleBtnClick} type="button">
+            Dropdown button
+          </button>
+          {openMenu && (
+            <div css={dropdownMenu} onClick={closeMenu}>
+              <a css={dropdownItem} href="#">
+                Action 1
+              </a>
+              <a css={dropdownItem} href="#">
+                Action 2
+              </a>
+              <a css={dropdownItem} href="#">
+                Action 3
+              </a>
+            </div>
+          )}
         </div>
       </div>
     </>
