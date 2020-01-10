@@ -21,7 +21,7 @@ const App: SFC<{}> = () => {
   const [openMenu, setOpenMenu] = useState(false);
 
   const handleBtnClick = (): void => {
-    setOpenMenu(true);
+    setOpenMenu(!openMenu);
   };
 
   const closeMenu = (): void => {

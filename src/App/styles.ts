@@ -11,7 +11,7 @@ export const root = css`
 `;
 
 export const container = css`
-  padding: 7rem 5%;
+  padding: 5rem 5%;
   text-align: center;
   ${sm} {
     padding-left: 10%;
@@ -32,7 +32,7 @@ export const title = css`
 `;
 
 export const subtitle = css`
-  margin: 0 0 3.5rem;
+  margin: 0 0 2.5rem;
 `;
 
 export const dropdown = css`
@@ -45,9 +45,9 @@ export const dropdownBtn = css`
   padding: 0.375rem 0.75rem;
   border-radius: 0.25rem;
   border-color: #6c757d;
+  line-height: 1.5;
   color: #fff;
   background: #6c757d;
-  line-height: 1.5;
   cursor: pointer;
   &:hover {
     border-color: #5a6268;
