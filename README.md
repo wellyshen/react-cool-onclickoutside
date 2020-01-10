@@ -55,7 +55,7 @@ const Dropdown = () => {
   });
 
   const handleClickBtn = () => {
-    setOpenMenu(true);
+    setOpenMenu(!openMenu);
   };
 
   return (
@@ -66,6 +66,8 @@ const Dropdown = () => {
   );
 };
 ```
+
+[![Edit useOnclickoutside demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/useonclickoutside-demo-g185l?fontsize=14&hidenavigation=1&theme=dark)
 
 Support multiple refs. Callback only be triggered when user clicks outside of the registered components.
 
