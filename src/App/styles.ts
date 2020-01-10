@@ -49,6 +49,7 @@ export const dropdownBtn = css`
   color: #fff;
   background: #6c757d;
   cursor: pointer;
+  transition: background 0.15s ease;
   &:hover {
     border-color: #5a6268;
     background: #5a6268;
