@@ -101,7 +101,7 @@ const registerRef = useOnclickoutside(callback[, options]);
 
 ### Parameters
 
-You must pass the `callback` to use this hook and you can access the [MouseEvent](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent) or [TouchEvent](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent) via the `event` parameter as below:
+You must pass the `callback` to use this hook and you can access the [MouseEvent](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent) or [TouchEvent](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent) via the `event` parameter as below.
 
 ```js
 const callback = event => {
