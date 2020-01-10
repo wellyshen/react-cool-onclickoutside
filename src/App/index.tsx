@@ -28,7 +28,7 @@ const App: SFC<{}> = () => {
     setOpenMenu(false);
   };
 
-  const setRef = useOnclickoutside(() => {
+  const registerRef = useOnclickoutside(() => {
     closeMenu();
   });
 
@@ -46,7 +46,7 @@ const App: SFC<{}> = () => {
         <p css={subtitle}>
           React hook to listen for clicks outside of the component(s).
         </p>
-        <div css={dropdown} ref={setRef}>
+        <div css={dropdown} ref={registerRef}>
           <button css={dropdownBtn} onClick={handleBtnClick} type="button">
             Dropdown button
           </button>
