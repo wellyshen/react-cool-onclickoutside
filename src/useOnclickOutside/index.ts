@@ -22,7 +22,7 @@ const clickedOnScrollbar = (e: MouseEvent): boolean =>
 const getEventOptions = (type: string): { passive: boolean } | boolean =>
   type.includes('touch') && canUsePassiveEvents() ? { passive: true } : false;
 
-const useOnclickoutside = (
+const useOnclickOutside = (
   callback: Callback,
   {
     eventTypes = ['mousedown', 'touchstart'],
@@ -70,4 +70,4 @@ const useOnclickoutside = (
   return setRef;
 };
 
-export default useOnclickoutside;
+export default useOnclickOutside;

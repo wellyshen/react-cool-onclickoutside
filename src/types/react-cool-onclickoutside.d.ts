@@ -12,7 +12,7 @@ declare module 'react-cool-onclickoutside' {
     (el: HTMLElement | null): void;
   }
 
-  const useOnclickoutside: (callback: Callback, options?: Options) => SetRef;
+  const useOnclickOutside: (callback: Callback, options?: Options) => SetRef;
 
-  export default useOnclickoutside;
+  export default useOnclickOutside;
 }
