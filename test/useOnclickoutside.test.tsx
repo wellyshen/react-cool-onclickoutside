@@ -2,7 +2,7 @@ import React, { SFC } from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 
-import useOnclickoutside, { Callback, Options } from '../src/useOnclickoutside';
+import useOnclickOutside, { Callback, Options } from '../src/useOnclickOutside';
 
 interface Props extends Options {
   callback: Callback;
@@ -13,7 +13,7 @@ const Compo: SFC<Props> = ({
   eventTypes,
   excludeScrollbar
 }: Props) => {
-  const registerRef = useOnclickoutside(callback, {
+  const registerRef = useOnclickOutside(callback, {
     eventTypes,
     excludeScrollbar
   });
@@ -26,7 +26,7 @@ const Compo: SFC<Props> = ({
   );
 };
 
-describe('useOnclickoutside', () => {
+describe('useOnclickOutside', () => {
   interface Return {
     cb: Function;
     getByTestId: Function;
@@ -111,7 +111,7 @@ describe('useOnclickoutside', () => {
   it('should return null from the beginning in ssr', () => {
     document.createElement = null;
 
-    const { result } = renderHook(() => useOnclickoutside(() => null));
+    const { result } = renderHook(() => useOnclickOutside(() => null));
 
     expect(result.current).toBeNull();
   });
