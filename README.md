@@ -46,11 +46,11 @@ $ npm install --save react-cool-onclickoutside
 Common use case.
 
 ```js
-import useOnclickoutside from 'react-cool-onclickoutside';
+import useOnclickOutside from 'react-cool-onclickoutside';
 
 const Dropdown = () => {
   const [openMenu, setOpenMenu] = useState(false);
-  const registerRef = useOnclickoutside(() => {
+  const registerRef = useOnclickOutside(() => {
     setOpenMenu(false);
   });
 
@@ -67,16 +67,16 @@ const Dropdown = () => {
 };
 ```
 
-[![Edit useOnclickoutside demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/useonclickoutside-demo-g185l?fontsize=14&hidenavigation=1&theme=dark)
+[![Edit useOnclickOutside demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/useonclickoutside-demo-g185l?fontsize=14&hidenavigation=1&theme=dark)
 
 Support multiple refs. Callback only be triggered when user clicks outside of the registered components.
 
 ```js
-import useOnclickoutside from 'react-cool-onclickoutside';
+import useOnclickOutside from 'react-cool-onclickoutside';
 
 const App = () => {
   const [showTips, setShowTips] = useState(true);
-  const registerRef = useOnclickoutside(() => {
+  const registerRef = useOnclickOutside(() => {
     setShowTips(false);
   });
 
@@ -96,7 +96,7 @@ const App = () => {
 ## API
 
 ```js
-const registerRef = useOnclickoutside(callback[, options]);
+const registerRef = useOnclickOutside(callback[, options]);
 ```
 
 ### Parameters
@@ -118,7 +118,7 @@ The `options` object may contain the following keys.
 
 ### Return
 
-A function to register the component(s) that `useOnclickoutside` hook should target to.
+A function to register the component(s) that `useOnclickOutside` hook should target to.
 
 ## Inspiration
 
