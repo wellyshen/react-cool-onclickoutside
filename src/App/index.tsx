@@ -5,7 +5,7 @@ import { Global, css } from '@emotion/core';
 import normalize from 'normalize.css';
 
 import GitHubCorner from '../GitHubCorner';
-import useOnclickoutside from '../useOnclickoutside';
+import useOnclickOutside from '../useOnclickOutside';
 import {
   root,
   container,
@@ -28,7 +28,7 @@ const App: SFC<{}> = () => {
     setOpenMenu(false);
   };
 
-  const registerRef = useOnclickoutside(() => {
+  const registerRef = useOnclickOutside(() => {
     closeMenu();
   });
 

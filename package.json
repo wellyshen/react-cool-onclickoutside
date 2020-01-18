@@ -180,7 +180,7 @@
       "\\.(apng|bmp|gif|ico|cur|jpg|jpeg|jfif|pjpeg|pjp|png|svg|tif|tiff|webp)$": "<rootDir>/__mocks__/file.ts"
     },
     "collectCoverageFrom": [
-      "src/useOnclickoutside/*.(ts|tsx)"
+      "src/useOnclickOutside/*.(ts|tsx)"
     ]
   },
   "devDependencies": {
