@@ -37,7 +37,7 @@ const useOnclickOutside = (
     if (el) refs.current.push(el);
   }, []);
 
-  const listener = useCallback(
+  const handler = useCallback(
     e => {
       const { current } = refs;
 
@@ -55,16 +55,16 @@ const useOnclickOutside = (
     if (!callback) return null;
 
     eventTypes.forEach(type => {
-      document.addEventListener(type, listener, getEventOptions(type));
+      document.addEventListener(type, handler, getEventOptions(type));
     });
 
     return (): void => {
       eventTypes.forEach(type => {
         // @ts-ignore
-        document.removeEventListener(type, listener, getEventOptions(type));
+        document.removeEventListener(type, handler, getEventOptions(type));
       });
     };
-  }, [callback, eventTypes, listener]);
+  }, [callback, eventTypes, handler]);
 
   return setRef;
 };
