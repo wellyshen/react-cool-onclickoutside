@@ -43,8 +43,7 @@ const useOnclickOutside = (
 
       if (!current.length || !callback) return;
       if (excludeScrollbar && clickedOnScrollbar(e)) return;
-      // eslint-disable-next-line no-restricted-syntax
-      for (const ref of current) if (ref.contains(e.target)) return;
+      if (!current.every(ref => !ref.contains(e.target))) return;
 
       callback(e);
     },
