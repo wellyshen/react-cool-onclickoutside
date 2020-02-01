@@ -25,7 +25,7 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 - ⛔️ Scrollbar can be excluded from clicks outside callback.
 - 📜 Support [TypeScript](https://www.typescriptlang.org) type definition.
 - 🗄️ Server-side rendering friendly.
-- 🦠 Tiny size ([~ 741B gzipped](https://bundlephobia.com/result?p=react-cool-onclickoutside)). No external dependencies, aside for the `react`.
+- 🦠 Tiny size ([~ 645B gzipped](https://bundlephobia.com/result?p=react-cool-onclickoutside)). No external dependencies, aside for the `react`.
 
 ## Requirement
 
