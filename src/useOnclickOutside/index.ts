@@ -47,7 +47,7 @@ const useOnclickOutside = (
 
       callback(e);
     },
-    [refs, excludeScrollbar, callback]
+    [excludeScrollbar, callback]
   );
 
   useEffect(() => {
