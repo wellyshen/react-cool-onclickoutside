@@ -26,7 +26,7 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 - 👂🏻 Enable you to [stop listening for outside clicks](#disabling-the-event-listener) when needed.
 - 📜 Support [TypeScript](https://www.typescriptlang.org) type definition.
 - 🗄️ Server-side rendering friendly.
-- 🦠 Tiny size ([~ 645B gzipped](https://bundlephobia.com/result?p=react-cool-onclickoutside)). No external dependencies, aside for the `react`.
+- 🦠 Tiny size ([< 1KB gzipped](https://bundlephobia.com/result?p=react-cool-onclickoutside)). No external dependencies, aside for the `react`.
 
 ## Requirement
 
