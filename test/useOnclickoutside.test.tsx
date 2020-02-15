@@ -8,15 +8,8 @@ interface Props extends Options {
   callback: Callback;
 }
 
-const Compo: SFC<Props> = ({
-  callback,
-  eventTypes,
-  excludeScrollbar
-}: Props) => {
-  const registerRef = useOnclickOutside(callback, {
-    eventTypes,
-    excludeScrollbar
-  });
+const Compo: SFC<Props> = ({ callback, ...options }: Props) => {
+  const registerRef = useOnclickOutside(callback, options);
 
   return (
     <>
@@ -33,6 +26,7 @@ describe('useOnclickOutside', () => {
   }
 
   const renderHelper = ({
+    disabled = false,
     eventTypes = ['mousedown', 'touchstart'],
     excludeScrollbar = false
   }: Options = {}): Return => {
@@ -40,6 +34,7 @@ describe('useOnclickOutside', () => {
     const { getByTestId } = render(
       <Compo
         callback={cb}
+        disabled={disabled}
         eventTypes={eventTypes}
         excludeScrollbar={excludeScrollbar}
       />
@@ -88,6 +83,15 @@ describe('useOnclickOutside', () => {
     fireEvent.mouseUp(document);
 
     expect(cb).toBeCalled();
+  });
+
+  it('should not trigger callback when event listener is disabled', () => {
+    const { cb } = renderHelper({ disabled: true });
+
+    fireEvent.mouseDown(document);
+    fireEvent.touchStart(document);
+
+    expect(cb).not.toBeCalled();
   });
 
   it('should not trigger callback when clicks inside of the scrollbar', () => {

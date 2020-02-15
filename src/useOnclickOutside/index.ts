@@ -8,6 +8,7 @@ export interface Callback {
   (event?: MouseEvent | TouchEvent): void;
 }
 export interface Options {
+  disabled?: boolean;
   eventTypes?: string[];
   excludeScrollbar?: boolean;
 }
@@ -25,6 +26,7 @@ const getEventOptions = (type: string): { passive: boolean } | boolean =>
 const useOnclickOutside = (
   callback: Callback,
   {
+    disabled = false,
     eventTypes = ['mousedown', 'touchstart'],
     excludeScrollbar = false
   }: Options = {}
@@ -51,19 +53,29 @@ const useOnclickOutside = (
   );
 
   useEffect(() => {
-    if (!callback) return null;
+    if (!callback) return;
 
-    eventTypes.forEach(type => {
-      document.addEventListener(type, handler, getEventOptions(type));
-    });
-
-    return (): void => {
+    const removeEventListener = (): void => {
       eventTypes.forEach(type => {
         // @ts-ignore
         document.removeEventListener(type, handler, getEventOptions(type));
       });
     };
-  }, [callback, eventTypes, handler]);
+
+    if (disabled) {
+      removeEventListener();
+      return;
+    }
+
+    eventTypes.forEach(type => {
+      document.addEventListener(type, handler, getEventOptions(type));
+    });
+
+    // eslint-disable-next-line consistent-return
+    return (): void => {
+      removeEventListener();
+    };
+  }, [callback, disabled, eventTypes, handler]);
 
   return setRef;
 };

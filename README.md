@@ -22,7 +22,8 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 - 🎣 Listen for clicks outside based on React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook).
 - 👯‍♀️ Support multiple [refs](https://reactjs.org/docs/refs-and-the-dom.html) to cover more use cases.
 - 🧻 Uses [passive event listeners](https://developers.google.com/web/tools/lighthouse/audits/passive-event-listeners) to improve scrolling performance.
-- ⛔️ Scrollbar can be excluded from clicks outside callback.
+- ⛔ Scrollbar can be excluded from the callback of outside clicks.
+- 👂🏻 Enable you to [stop listening for outside clicks](#disabling-the-event-listener) when needed.
 - 📜 Support [TypeScript](https://www.typescriptlang.org) type definition.
 - 🗄️ Server-side rendering friendly.
 - 🦠 Tiny size ([~ 645B gzipped](https://bundlephobia.com/result?p=react-cool-onclickoutside)). No external dependencies, aside for the `react`.
@@ -46,6 +47,7 @@ $ npm install --save react-cool-onclickoutside
 Common use case.
 
 ```js
+import React, { useState } from 'react';
 import useOnclickOutside from 'react-cool-onclickoutside';
 
 const Dropdown = () => {
@@ -60,7 +62,7 @@ const Dropdown = () => {
 
   return (
     <div>
-      <div onClick={handleClickBtn}>Button</div>
+      <button onClick={handleClickBtn}>Button</button>
       {openMenu && <div ref={registerRef}>Menu</div>}
     </div>
   );
@@ -72,6 +74,7 @@ const Dropdown = () => {
 Support multiple refs. Callback only be triggered when user clicks outside of the registered components.
 
 ```js
+import React, { useState } from 'react';
 import useOnclickOutside from 'react-cool-onclickoutside';
 
 const App = () => {
@@ -84,10 +87,42 @@ const App = () => {
     <div>
       {showTips && (
         <>
-          <Tooltip ref={registerRef} />
-          <Tooltip ref={registerRef} />
+          <div ref={registerRef}>Tooltip 1</div>
+          <div ref={registerRef}>Tooltip 2</div>
         </>
       )}
+    </div>
+  );
+};
+```
+
+## Disabling the Event Listener
+
+In case you want to disable the event listener for performance reasons or fulfill some use cases. We provide the `disabled` option for you. Once you set it as `true`, the callback won’t be triggered.
+
+```js
+import React, { useState } from 'react';
+import useOnclickOutside from 'react-cool-onclickoutside';
+
+const App = () => {
+  const [disabled, setDisabled] = useState(false);
+  const registerRef = useOnclickOutside(
+    () => {
+      // Do something...
+    },
+    { disabled }
+  );
+
+  const handleBtnClick = () => {
+    setDisabled(true);
+  };
+
+  return (
+    <div>
+      <button onClick={handleBtnClick}>
+        Stop listening for outside clicks
+      </button>
+      <div ref={registerRef}>I'm a 📦</div>
     </div>
   );
 };
@@ -113,6 +148,7 @@ The `options` object may contain the following keys.
 
 | Key                | Type    | Default                       | Description                                                    |
 | ------------------ | ------- | ----------------------------- | -------------------------------------------------------------- |
+| `disabled`         | boolean | `false`                       | Enable/disable the event listener.                             |
 | `eventTypes`       | Array   | `['mousedown', 'touchstart']` | Which events to listen for.                                    |
 | `excludeScrollbar` | boolean | `false`                       | Whether or not to listen (ignore) to browser scrollbar clicks. |
 

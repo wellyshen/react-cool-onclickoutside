@@ -4,6 +4,7 @@ declare module 'react-cool-onclickoutside' {
   }
 
   interface Options {
+    disabled?: boolean;
     eventTypes?: string[];
     excludeScrollbar?: boolean;
   }
