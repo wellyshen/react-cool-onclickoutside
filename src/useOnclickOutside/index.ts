@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable react-hooks/rules-of-hooks, consistent-return */
 
 import { useRef, useCallback, useEffect } from 'react';
 
@@ -31,7 +31,7 @@ const useOnclickOutside = (
     excludeScrollbar = false
   }: Options = {}
 ): SetRef => {
-  if (typeof document === 'undefined' || !document.createElement) return null;
+  if (typeof document === 'undefined' || !document.createElement) return;
 
   const refs = useRef([]);
 
@@ -71,7 +71,6 @@ const useOnclickOutside = (
       document.addEventListener(type, handler, getEventOptions(type));
     });
 
-    // eslint-disable-next-line consistent-return
     return (): void => {
       removeEventListener();
     };

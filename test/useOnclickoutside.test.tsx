@@ -117,6 +117,6 @@ describe('useOnclickOutside', () => {
 
     const { result } = renderHook(() => useOnclickOutside(() => null));
 
-    expect(result.current).toBeNull();
+    expect(result.current).toBeUndefined();
   });
 });
