@@ -1,4 +1,4 @@
-import canUsePassiveEvents from '../src/useOnclickOutside/canUsePassiveEvents';
+import canUsePassiveEvents from '../canUsePassiveEvents';
 
 describe('canUsePassiveEvents', () => {
   it('should get false in ssr', () => {

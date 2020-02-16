@@ -5,7 +5,7 @@ import { Global, css } from '@emotion/core';
 import normalize from 'normalize.css';
 
 import GitHubCorner from '../GitHubCorner';
-import useOnclickOutside from '../useOnclickOutside';
+import useOnclickOutside from '../../src';
 import {
   root,
   container,
