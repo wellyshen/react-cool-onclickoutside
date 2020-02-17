@@ -39,21 +39,18 @@ const useOnclickOutside = (
     if (el) refs.current.push(el);
   }, []);
 
-  const handler = useCallback(
-    e => {
+  useEffect(() => {
+    if (!callback) return;
+
+    const handler = (e: any): void => {
       const { current } = refs;
 
-      if (!current.length || !callback) return;
-      if (excludeScrollbar && clickedOnScrollbar(e)) return;
+      if (!current.length) return;
+      if (!e.touches && excludeScrollbar && clickedOnScrollbar(e)) return;
       if (!current.every(ref => !ref.contains(e.target))) return;
 
       callback(e);
-    },
-    [excludeScrollbar, callback]
-  );
-
-  useEffect(() => {
-    if (!callback) return;
+    };
 
     const removeEventListener = (): void => {
       eventTypes.forEach(type => {
@@ -74,7 +71,7 @@ const useOnclickOutside = (
     return (): void => {
       removeEventListener();
     };
-  }, [callback, disabled, eventTypes, handler]);
+  }, [callback, excludeScrollbar, disabled, eventTypes]);
 
   return setRef;
 };
