@@ -2,7 +2,7 @@ import React, { SFC } from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 
-import useOnclickOutside, { Callback, Options } from '../useOnclickoutside';
+import useOnclickOutside, { Callback, Options } from '..';
 
 interface Props extends Options {
   callback: Callback;
