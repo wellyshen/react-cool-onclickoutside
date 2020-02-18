@@ -1,4 +1,4 @@
-import React, { SFC } from 'react';
+import React, { SFC, useRef } from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 
@@ -9,12 +9,15 @@ interface Props extends Options {
 }
 
 const Compo: SFC<Props> = ({ callback, ...options }: Props) => {
-  const registerRef = useOnclickOutside(callback, options);
+  const ref1 = useRef();
+  const ref2 = useRef();
+
+  useOnclickOutside([ref1, ref2], callback, options);
 
   return (
     <>
-      <div data-testid="ref-1" ref={registerRef} />
-      <div data-testid="ref-2" ref={registerRef} />
+      <div data-testid="ref-1" ref={ref1} />
+      <div data-testid="ref-2" ref={ref2} />
     </>
   );
 };
@@ -115,7 +118,7 @@ describe('useOnclickOutside', () => {
   it('should return null from the beginning in ssr', () => {
     document.createElement = null;
 
-    const { result } = renderHook(() => useOnclickOutside(() => null));
+    const { result } = renderHook(() => useOnclickOutside(null, () => null));
 
     expect(result.current).toBeUndefined();
   });

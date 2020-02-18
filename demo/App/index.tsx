@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions, jsx-a11y/anchor-is-valid */
 
-import React, { SFC, useState } from 'react';
+import React, { SFC, useRef, useState } from 'react';
 import { Global, css } from '@emotion/core';
 import normalize from 'normalize.css';
 
@@ -18,6 +18,7 @@ import {
 } from './styles';
 
 const App: SFC<{}> = () => {
+  const ref = useRef();
   const [openMenu, setOpenMenu] = useState(false);
 
   const handleBtnClick = (): void => {
@@ -28,7 +29,7 @@ const App: SFC<{}> = () => {
     setOpenMenu(false);
   };
 
-  const registerRef = useOnclickOutside(() => {
+  useOnclickOutside(ref, () => {
     closeMenu();
   });
 
@@ -46,7 +47,7 @@ const App: SFC<{}> = () => {
         <p css={subtitle}>
           React hook to listen for clicks outside of the component(s).
         </p>
-        <div css={dropdown} ref={registerRef}>
+        <div css={dropdown} ref={ref}>
           <button css={dropdownBtn} onClick={handleBtnClick} type="button">
             Dropdown button
           </button>

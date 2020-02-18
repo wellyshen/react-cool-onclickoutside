@@ -1,19 +1,15 @@
-/* eslint-disable react-hooks/rules-of-hooks, consistent-return */
+/* eslint-disable react-hooks/rules-of-hooks */
 
-import { useRef, useCallback, useEffect } from 'react';
+import { RefObject, useRef, useEffect } from 'react';
 
 import canUsePassiveEvents from './canUsePassiveEvents';
 
-export interface Callback {
-  (event?: MouseEvent | TouchEvent): void;
-}
+type Ref = RefObject<HTMLElement>;
+export type Callback = (event?: Event) => void;
 export interface Options {
   disabled?: boolean;
   eventTypes?: string[];
   excludeScrollbar?: boolean;
-}
-interface SetRef {
-  (el: HTMLElement | null): void;
 }
 
 const clickedOnScrollbar = (e: MouseEvent): boolean =>
@@ -24,32 +20,37 @@ const getEventOptions = (type: string): { passive: boolean } | boolean =>
   type.includes('touch') && canUsePassiveEvents() ? { passive: true } : false;
 
 const useOnclickOutside = (
+  ref: Ref | Ref[],
   callback: Callback,
   {
     disabled = false,
     eventTypes = ['mousedown', 'touchstart'],
     excludeScrollbar = false
   }: Options = {}
-): SetRef => {
-  if (typeof document === 'undefined' || !document.createElement) return;
+): void => {
+  if (typeof document === 'undefined') return;
 
-  const refs = useRef([]);
-
-  const setRef: SetRef = useCallback(el => {
-    if (el) refs.current.push(el);
-  }, []);
+  const callbackRef = useRef(callback);
 
   useEffect(() => {
-    if (!callback) return;
+    callbackRef.current = callback;
+  }, [callback]);
+
+  useEffect(() => {
+    if (!ref || !callbackRef.current) return;
 
     const handler = (e: any): void => {
-      const { current } = refs;
+      const refs = Array.isArray(ref) ? ref : [ref];
+      const els: HTMLElement[] = [];
+      refs.forEach(({ current }) => {
+        if (current) els.push(current);
+      });
 
-      if (!current.length) return;
-      if (!e.touches && excludeScrollbar && clickedOnScrollbar(e)) return;
-      if (!current.every(ref => !ref.contains(e.target))) return;
+      if (!els.length) return;
+      if (excludeScrollbar && clickedOnScrollbar(e)) return;
+      if (!els.every(el => !el.contains(e.target))) return;
 
-      callback(e);
+      callbackRef.current(e);
     };
 
     const removeEventListener = (): void => {
@@ -68,12 +69,11 @@ const useOnclickOutside = (
       document.addEventListener(type, handler, getEventOptions(type));
     });
 
+    // eslint-disable-next-line consistent-return
     return (): void => {
       removeEventListener();
     };
-  }, [callback, excludeScrollbar, disabled, eventTypes]);
-
-  return setRef;
+  }, [ref, excludeScrollbar, disabled, eventTypes]);
 };
 
 export default useOnclickOutside;
