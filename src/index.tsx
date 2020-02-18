@@ -30,7 +30,7 @@ const useOnclickOutside = (
 ): void => {
   if (typeof document === 'undefined') return;
 
-  const callbackRef = useRef(callback);
+  const callbackRef = useRef(null);
 
   useEffect(() => {
     callbackRef.current = callback;
