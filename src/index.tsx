@@ -5,8 +5,8 @@ import { RefObject, useRef, useEffect } from 'react';
 import canUsePassiveEvents from './canUsePassiveEvents';
 
 type Ref = RefObject<HTMLElement>;
-export interface Callback {
-  (event?: Event): void;
+export interface Callback<T extends Event = Event> {
+  (event?: T): void;
 }
 export interface Options {
   disabled?: boolean;

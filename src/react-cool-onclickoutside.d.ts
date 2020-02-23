@@ -3,8 +3,8 @@ declare module 'react-cool-onclickoutside' {
 
   type Ref = RefObject<HTMLElement>;
 
-  interface Callback {
-    (event?: Event): void;
+  export interface Callback<T extends Event = Event> {
+    (event?: T): void;
   }
 
   interface Options {
