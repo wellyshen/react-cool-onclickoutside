@@ -48,11 +48,22 @@ const App: SFC<{}> = () => {
           React hook to listen for clicks outside of the component(s).
         </p>
         <div css={dropdown} ref={ref}>
-          <button css={dropdownBtn} onClick={handleBtnClick} type="button">
+          <button
+            css={dropdownBtn}
+            onClick={handleBtnClick}
+            type="button"
+            id="dropdown-menu-button"
+            aria-haspopup="true"
+            aria-expanded={openMenu}
+          >
             Dropdown button
           </button>
           {openMenu && (
-            <div css={dropdownMenu} onClick={closeMenu}>
+            <div
+              css={dropdownMenu}
+              onClick={closeMenu}
+              aria-labelledby="dropdown-menu-button"
+            >
               <a css={dropdownItem} href="#">
                 Action 1
               </a>
