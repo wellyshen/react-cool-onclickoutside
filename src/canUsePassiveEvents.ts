@@ -10,7 +10,7 @@ export default (): boolean => {
     // eslint-disable-next-line getter-return
     get() {
       passive = true;
-    }
+    },
   });
   const noop = (): void => null;
 
