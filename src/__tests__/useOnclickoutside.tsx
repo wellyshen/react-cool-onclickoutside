@@ -9,8 +9,8 @@ interface Props extends Options {
 }
 
 const Compo: SFC<Props> = ({ callback, ...options }: Props) => {
-  const ref1 = useRef();
-  const ref2 = useRef();
+  const ref1 = useRef<HTMLDivElement>();
+  const ref2 = useRef<HTMLDivElement>();
 
   useOnclickOutside([ref1, ref2], callback, options);
 
@@ -31,7 +31,7 @@ describe('useOnclickOutside', () => {
   const renderHelper = ({
     disabled = false,
     eventTypes = ['mousedown', 'touchstart'],
-    excludeScrollbar = false
+    excludeScrollbar = false,
   }: Options = {}): Return => {
     const cb = jest.fn();
     const { getByTestId } = render(
@@ -49,7 +49,7 @@ describe('useOnclickOutside', () => {
   it('should not trigger callback when clicks (touches) inside of the target refs', () => {
     Object.defineProperties(window.HTMLHtmlElement.prototype, {
       clientWidth: { value: 100 },
-      clientHeight: { value: 100 }
+      clientHeight: { value: 100 },
     });
 
     const { cb, getByTestId } = renderHelper();

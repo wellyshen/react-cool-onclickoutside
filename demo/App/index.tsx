@@ -14,12 +14,12 @@ import {
   dropdown,
   dropdownBtn,
   dropdownMenu,
-  dropdownItem
+  dropdownItem,
 } from './styles';
 
 const App: SFC<{}> = () => {
-  const ref = useRef();
-  const [openMenu, setOpenMenu] = useState(false);
+  const ref = useRef<HTMLDivElement>();
+  const [openMenu, setOpenMenu] = useState<boolean>(false);
 
   const handleBtnClick = (): void => {
     setOpenMenu(!openMenu);
