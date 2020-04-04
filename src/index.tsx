@@ -28,14 +28,14 @@ const useOnclickOutside = (
     excludeScrollbar = false,
   }: Options = {}
 ): void => {
-  const callbackRef = useRef<Callback>(null);
+  const callbackRef = useRef<Callback>(callback);
 
   useEffect(() => {
     callbackRef.current = callback;
   }, [callback]);
 
   useEffect(() => {
-    if (!ref || !callbackRef.current) return;
+    if (!ref) return;
 
     const handler = (e: any): void => {
       const refs = Array.isArray(ref) ? ref : [ref];
