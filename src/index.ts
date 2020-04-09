@@ -44,9 +44,8 @@ const useOnclickOutside = (
         if (current) els.push(current);
       });
 
-      if (!els.length) return;
       if (excludeScrollbar && clickedOnScrollbar(e)) return;
-      if (!els.every((el) => !el.contains(e.target))) return;
+      if (!els.length || !els.every((el) => !el.contains(e.target))) return;
 
       callbackRef.current(e);
     };
