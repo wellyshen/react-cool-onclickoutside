@@ -101,6 +101,57 @@ const App = () => {
 };
 ```
 
+## Ignore Elements by CSS Class Name
+
+You can tell `react-cool-onclickoutside` to ignore certain elements during the event loop by the `ignore-onclickoutside` CSS class name. If you want explicit control over the class name, use the `ignoreClass` option.
+
+```js
+import React, { useState, useRef } from 'react';
+import useOnclickOutside from 'react-cool-onclickoutside';
+
+// Use default CSS class name
+const App = () => {
+  const ref = useRef();
+
+  useOnclickOutside(ref, () => {
+    // Do something...
+  });
+
+  return (
+    <div>
+      <div ref={ref}>I'm a 🍕</div>
+      <div>Click me will trigger the event's callback</div>
+      <div className="ignore-onclickoutside">
+        Click me won't trigger the event's callback
+      </div>
+    </div>
+  );
+};
+
+// Use the CSS class name that you defined
+const App = () => {
+  const ref = useRef();
+
+  useOnclickOutside(
+    ref,
+    () => {
+      // Do something...
+    },
+    { ignoreClass: 'my-ignore-class' }
+  );
+
+  return (
+    <div>
+      <div ref={ref}>I'm a 🍕</div>
+      <div>Click me will trigger the event's callback</div>
+      <div className="my-ignore-class">
+        Click me won't trigger the event's callback
+      </div>
+    </div>
+  );
+};
+```
+
 ## Disabling the Event Listener
 
 In case you want to disable the event listener for performance reasons or fulfill some use cases. We provide the `disabled` option for you. Once you set it as `true`, the callback won’t be triggered.
@@ -130,7 +181,7 @@ const App = () => {
       <button onClick={handleBtnClick}>
         Stop listening for outside clicks
       </button>
-      <div ref={ref}>I'm a 📦</div>
+      <div ref={ref}>I'm a 🍎</div>
     </div>
   );
 };
@@ -150,18 +201,19 @@ useOnclickOutside(ref: Ref | Ref[], callback: Callback, options?: object);
 You must pass the `ref` and `callback` to use this hook and you can access the `event` object via the callback parameter, default will be [MouseEvent](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent) or [TouchEvent](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent).
 
 ```js
-const callback = event => {
+const callback = (event) => {
   console.log('Event: ', event);
 };
 ```
 
 The `options` object may contain the following keys.
 
-| Key                | Type    | Default                       | Description                                                    |
-| ------------------ | ------- | ----------------------------- | -------------------------------------------------------------- |
-| `disabled`         | boolean | `false`                       | Enable/disable the event listener.                             |
-| `eventTypes`       | Array   | `['mousedown', 'touchstart']` | Which events to listen for.                                    |
-| `excludeScrollbar` | boolean | `false`                       | Whether or not to listen (ignore) to browser scrollbar clicks. |
+| Key                | Type    | Default                       | Description                                                                              |
+| ------------------ | ------- | ----------------------------- | ---------------------------------------------------------------------------------------- |
+| `disabled`         | boolean | `false`                       | Enable/disable the event listener.                                                       |
+| `eventTypes`       | Array   | `['mousedown', 'touchstart']` | Which events to listen for.                                                              |
+| `excludeScrollbar` | boolean | `false`                       | Whether or not to listen (ignore) to browser scrollbar clicks.                           |
+| `ignoreClass`      | string  | `ignore-onclickoutside`       | To ignore certain elements during the event loop by the CSS class name that you defined. |
 
 ## Inspiration
 

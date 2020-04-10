@@ -11,6 +11,7 @@ declare module 'react-cool-onclickoutside' {
     disabled?: boolean;
     eventTypes?: string[];
     excludeScrollbar?: boolean;
+    ignoreClass?: string;
   }
 
   const useOnclickOutside: (
