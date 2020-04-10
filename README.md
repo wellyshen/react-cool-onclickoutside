@@ -23,7 +23,8 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 - 👯‍♀️ Support multiple [refs](https://reactjs.org/docs/refs-and-the-dom.html) to cover more use cases.
 - 🧻 Uses [passive event listeners](https://developers.google.com/web/tools/lighthouse/audits/passive-event-listeners) to improve scrolling performance.
 - ⛔ Scrollbar can be excluded from the callback of outside clicks.
-- 👂🏻 Enable you to [stop listening for outside clicks](#disabling-the-event-listener) when needed.
+- 🙈 [Ignore certain elements](#ignore-elements-by-css-class-name) during the event loop.
+- 🙉 Enable you to [stop listening for outside clicks](#disabling-the-event-listener) when needed.
 - 📜 Support [TypeScript](https://www.typescriptlang.org) type definition.
 - 🗄️ Server-side rendering compatibility.
 - 🦠 Tiny size ([< 1KB gzipped](https://bundlephobia.com/result?p=react-cool-onclickoutside)). No external dependencies, aside for the `react`.
