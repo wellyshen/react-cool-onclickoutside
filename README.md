@@ -191,7 +191,7 @@ const App = () => {
 ## API
 
 ```js
-type Ref = HTMLElement;
+type Ref = RefObject<HTMLElement>;
 type Callback = (event?: Event) => void;
 
 useOnclickOutside(ref: Ref | Ref[], callback: Callback, options?: object);
