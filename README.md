@@ -2,7 +2,7 @@
 
 This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom-hook) to trigger callback when user clicks outside of the target component(s) area. It's a useful logic for UI interaction design (IxD) like dismiss a dropdown menu, modal or tooltip etc. You can check the [features](#features) section to learn more.
 
-⚡️ Live demo: https://react-cool-onclickoutside.netlify.com
+⚡️ Live demo: https://react-cool-onclickoutside.netlify.app
 
 ❤️ it? ⭐️ it on [GitHub](https://github.com/wellyshen/react-cool-onclickoutside/stargazers) or [Tweet](https://twitter.com/intent/tweet?text=With%20@react-cool-onclickoutside,%20I%20can%20build%20UI%20components%20efficiently.%20Thanks,%20@Welly%20Shen%20🤩) about it.
 
