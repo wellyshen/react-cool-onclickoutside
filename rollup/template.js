@@ -14,9 +14,9 @@ export default ({ files }) => `
       <title>React Cool Onclickoutside</title>
       <meta property="og:title" content="React Cool Onclickoutside" />
       <meta property="og:type" content="website" />
-      <meta property="og:image" content="https://react-cool-onclickoutside.netlify.com/assets/og_image.png" />
+      <meta property="og:image" content="https://react-cool-onclickoutside.netlify.app/assets/og_image.png" />
       <meta property="og:description" content="React hook to listen for clicks outside of the component(s)." />
-      <meta property="og:url" content="https://react-cool-onclickoutside.netlify.com" />
+      <meta property="og:url" content="https://react-cool-onclickoutside.netlify.app" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@react-cool-onclickoutside" />
       <meta name="twitter:creator" content="@wellyshen" />
