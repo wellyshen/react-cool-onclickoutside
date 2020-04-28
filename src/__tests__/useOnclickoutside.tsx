@@ -69,12 +69,12 @@ describe('useOnclickOutside', () => {
     fireEvent.mouseDown(ref1);
     fireEvent.touchStart(ref1);
 
-    expect(cb).not.toBeCalled();
+    expect(cb).not.toHaveBeenCalled();
 
     fireEvent.mouseDown(ref2);
     fireEvent.touchStart(ref2);
 
-    expect(cb).not.toBeCalled();
+    expect(cb).not.toHaveBeenCalled();
   });
 
   it('should not trigger callback when clicks an element with default ignore class', () => {
@@ -85,7 +85,7 @@ describe('useOnclickOutside', () => {
     fireEvent.mouseDown(out2);
     fireEvent.mouseDown(out3);
 
-    expect(cb).not.toBeCalled();
+    expect(cb).not.toHaveBeenCalled();
   });
 
   it('should not trigger callback when clicks an element with specified ignore class', () => {
@@ -98,7 +98,7 @@ describe('useOnclickOutside', () => {
     fireEvent.mouseDown(out2);
     fireEvent.mouseDown(out3);
 
-    expect(cb).not.toBeCalled();
+    expect(cb).not.toHaveBeenCalled();
   });
 
   it('should trigger callback when clicks outside (touches) of the target refs', () => {
@@ -108,7 +108,7 @@ describe('useOnclickOutside', () => {
     fireEvent.mouseDown(out);
     fireEvent.touchStart(out);
 
-    expect(cb).toBeCalledTimes(2);
+    expect(cb).toHaveBeenCalledTimes(2);
   });
 
   it('should trigger callback by the assign event type', () => {
@@ -117,11 +117,11 @@ describe('useOnclickOutside', () => {
 
     fireEvent.mouseDown(out);
 
-    expect(cb).not.toBeCalled();
+    expect(cb).not.toHaveBeenCalled();
 
     fireEvent.mouseUp(out);
 
-    expect(cb).toBeCalled();
+    expect(cb).toHaveBeenCalled();
   });
 
   it('should not trigger callback when event listener is disabled', () => {
@@ -131,7 +131,7 @@ describe('useOnclickOutside', () => {
     fireEvent.mouseDown(out);
     fireEvent.touchStart(out);
 
-    expect(cb).not.toBeCalled();
+    expect(cb).not.toHaveBeenCalled();
   });
 
   it('should not trigger callback when clicks inside of the scrollbar', () => {
@@ -141,7 +141,7 @@ describe('useOnclickOutside', () => {
     fireEvent.mouseDown(out, { clientX: 110 });
     fireEvent.mouseDown(out, { clientY: 110 });
 
-    expect(cb).not.toBeCalled();
+    expect(cb).not.toHaveBeenCalled();
   });
 
   it('should trigger callback when clicks outside of the scrollbar', () => {
@@ -151,7 +151,7 @@ describe('useOnclickOutside', () => {
     fireEvent.mouseDown(out, { clientX: 90 });
     fireEvent.mouseDown(out, { clientY: 90 });
 
-    expect(cb).toBeCalledTimes(2);
+    expect(cb).toHaveBeenCalledTimes(2);
   });
 
   it('should return null from the beginning in ssr', () => {
