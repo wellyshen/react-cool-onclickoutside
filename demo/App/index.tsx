@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions, jsx-a11y/anchor-is-valid */
 
-import React, { SFC, useRef, useState } from 'react';
+import React, { FC, useRef, useState } from 'react';
 import { Global, css } from '@emotion/core';
 import normalize from 'normalize.css';
 
@@ -17,7 +17,7 @@ import {
   dropdownItem,
 } from './styles';
 
-const App: SFC<{}> = () => {
+const App: FC<{}> = () => {
   const ref = useRef<HTMLDivElement>();
   const [openMenu, setOpenMenu] = useState<boolean>(false);
 

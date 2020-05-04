@@ -1,4 +1,4 @@
-import React, { SFC, useRef } from 'react';
+import React, { FC, useRef } from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { renderHook } from '@testing-library/react-hooks';
 
@@ -9,7 +9,7 @@ interface Props extends Options {
   callback: Callback;
 }
 
-const Compo: SFC<Props> = ({ className, callback, ...options }: Props) => {
+const Compo: FC<Props> = ({ className, callback, ...options }: Props) => {
   const ref1 = useRef<HTMLDivElement>();
   const ref2 = useRef<HTMLDivElement>();
 
