@@ -1,8 +1,8 @@
-import { RefObject, useRef, useEffect } from 'react';
+import { RefObject, useRef, useEffect } from "react";
 
-import canUsePassiveEvents from './canUsePassiveEvents';
+import canUsePassiveEvents from "./canUsePassiveEvents";
 
-export const DEFAULT_IGNORE_CLASS = 'ignore-onclickoutside';
+export const DEFAULT_IGNORE_CLASS = "ignore-onclickoutside";
 
 const hasIgnoreClass = (e: any, ignoreClass: string): boolean => {
   let el = e.target;
@@ -20,7 +20,7 @@ const clickedOnScrollbar = (e: MouseEvent): boolean =>
   document.documentElement.clientHeight <= e.clientY;
 
 const getEventOptions = (type: string): { passive: boolean } | boolean =>
-  type.includes('touch') && canUsePassiveEvents() ? { passive: true } : false;
+  type.includes("touch") && canUsePassiveEvents() ? { passive: true } : false;
 
 type Ref = RefObject<HTMLElement>;
 export interface Callback<T extends Event = Event> {
@@ -38,7 +38,7 @@ const useOnclickOutside = (
   callback: Callback,
   {
     disabled = false,
-    eventTypes = ['mousedown', 'touchstart'],
+    eventTypes = ["mousedown", "touchstart"],
     excludeScrollbar = false,
     ignoreClass = DEFAULT_IGNORE_CLASS,
   }: Options = {}

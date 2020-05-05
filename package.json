@@ -136,12 +136,7 @@
       "import/no-extraneous-dependencies": "off",
       "@typescript-eslint/ban-ts-ignore": "off",
       "@typescript-eslint/no-explicit-any": "off",
-      "prettier/prettier": [
-        "error",
-        {
-          "singleQuote": true
-        }
-      ]
+      "prettier/prettier": "error"
     }
   },
   "eslintIgnore": [

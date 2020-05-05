@@ -1,5 +1,5 @@
-declare module 'react-cool-onclickoutside' {
-  import { RefObject } from 'react';
+declare module "react-cool-onclickoutside" {
+  import { RefObject } from "react";
 
   type Ref = RefObject<HTMLElement>;
 

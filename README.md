@@ -48,8 +48,8 @@ $ npm install --save react-cool-onclickoutside
 Common use case.
 
 ```js
-import React, { useState, useRef } from 'react';
-import useOnclickOutside from 'react-cool-onclickoutside';
+import React, { useState, useRef } from "react";
+import useOnclickOutside from "react-cool-onclickoutside";
 
 const Dropdown = () => {
   const [openMenu, setOpenMenu] = useState(false);
@@ -77,8 +77,8 @@ const Dropdown = () => {
 Support multiple refs. Callback only be triggered when user clicks outside of the registered components.
 
 ```js
-import React, { useState, useRef } from 'react';
-import useOnclickOutside from 'react-cool-onclickoutside';
+import React, { useState, useRef } from "react";
+import useOnclickOutside from "react-cool-onclickoutside";
 
 const App = () => {
   const [showTips, setShowTips] = useState(true);
@@ -107,8 +107,8 @@ const App = () => {
 You can tell `react-cool-onclickoutside` to ignore certain elements during the event loop by the `ignore-onclickoutside` CSS class name. If you want explicit control over the class name, use the `ignoreClass` option.
 
 ```js
-import React, { useState, useRef } from 'react';
-import useOnclickOutside from 'react-cool-onclickoutside';
+import React, { useState, useRef } from "react";
+import useOnclickOutside from "react-cool-onclickoutside";
 
 // Use default CSS class name
 const App = () => {
@@ -138,7 +138,7 @@ const App = () => {
     () => {
       // Do something...
     },
-    { ignoreClass: 'my-ignore-class' }
+    { ignoreClass: "my-ignore-class" }
   );
 
   return (
@@ -158,8 +158,8 @@ const App = () => {
 In case you want to disable the event listener for performance reasons or fulfill some use cases. We provide the `disabled` option for you. Once you set it as `true`, the callback won’t be triggered.
 
 ```js
-import React, { useState, useRef } from 'react';
-import useOnclickOutside from 'react-cool-onclickoutside';
+import React, { useState, useRef } from "react";
+import useOnclickOutside from "react-cool-onclickoutside";
 
 const App = () => {
   const [disabled, setDisabled] = useState(false);
@@ -203,7 +203,7 @@ You must pass the `ref` and `callback` to use this hook and you can access the `
 
 ```js
 const callback = (event) => {
-  console.log('Event: ', event);
+  console.log("Event: ", event);
 };
 ```
 

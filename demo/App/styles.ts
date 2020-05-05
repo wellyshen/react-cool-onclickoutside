@@ -1,12 +1,12 @@
-import { css } from '@emotion/core';
+import { css } from "@emotion/core";
 
-import mq from '../utils/mq';
+import mq from "../utils/mq";
 
 const { sm, md, lg } = mq;
 
 export const root = css`
   body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
   }
 `;
 
@@ -59,7 +59,7 @@ export const dropdownBtn = css`
     box-shadow: 0 0 0 0.2rem rgba(130, 138, 145, 0.5);
   }
   &::after {
-    content: '';
+    content: "";
     display: inline-block;
     margin-left: 0.5rem;
     vertical-align: 0.25rem;
