@@ -37,8 +37,8 @@ describe("useOnclickOutside", () => {
     className?: string;
   }
   interface Return {
-    cb: Function;
-    getByTestId: Function;
+    cb: any;
+    getByTestId: any;
   }
 
   const renderHelper = ({

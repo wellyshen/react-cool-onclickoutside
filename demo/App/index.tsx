@@ -17,7 +17,7 @@ import {
   dropdownItem,
 } from "./styles";
 
-const App: FC<{}> = () => {
+const App: FC = () => {
   const ref = useRef<HTMLDivElement>();
   const [openMenu, setOpenMenu] = useState<boolean>(false);
 
