@@ -6,7 +6,7 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 
 ❤️ it? ⭐️ it on [GitHub](https://github.com/wellyshen/react-cool-onclickoutside/stargazers) or [Tweet](https://twitter.com/intent/tweet?text=With%20@react-cool-onclickoutside,%20I%20can%20build%20UI%20components%20efficiently.%20Thanks,%20@Welly%20Shen%20🤩) about it.
 
-[![build status](https://img.shields.io/travis/wellyshen/react-cool-onclickoutside/master?style=flat-square)](https://travis-ci.org/wellyshen/react-cool-onclickoutside)
+[![build status](https://img.shields.io/github/workflow/status/wellyshen/react-cool-onclickoutside/CI?style=flat-square)](https://github.com/wellyshen/react-cool-onclickoutside/actions?query=workflow%3ACI)
 [![coverage status](https://img.shields.io/coveralls/github/wellyshen/react-cool-onclickoutside?style=flat-square)](https://coveralls.io/github/wellyshen/react-cool-onclickoutside?branch=master)
 [![npm version](https://img.shields.io/npm/v/react-cool-onclickoutside?style=flat-square)](https://www.npmjs.com/package/react-cool-onclickoutside)
 [![npm downloads](https://img.shields.io/npm/dm/react-cool-onclickoutside?style=flat-square)](https://www.npmtrends.com/react-cool-onclickoutside)
