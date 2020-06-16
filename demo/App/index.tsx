@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions, jsx-a11y/anchor-is-valid */
 
-import React, { FC, useRef, useState } from "react";
+import React, { FC, useState } from "react";
 import { Global, css } from "@emotion/core";
 import normalize from "normalize.css";
 
@@ -18,7 +18,6 @@ import {
 } from "./styles";
 
 const App: FC = () => {
-  const ref = useRef<HTMLDivElement>();
   const [openMenu, setOpenMenu] = useState<boolean>(false);
 
   const handleBtnClick = (): void => {
@@ -29,7 +28,7 @@ const App: FC = () => {
     setOpenMenu(false);
   };
 
-  useOnclickOutside(ref, () => {
+  const ref = useOnclickOutside(() => {
     closeMenu();
   });
 
