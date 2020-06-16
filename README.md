@@ -106,7 +106,7 @@ You can tell `react-cool-onclickoutside` to ignore certain elements during the e
 import React, { useState } from "react";
 import useOnclickOutside from "react-cool-onclickoutside";
 
-// Use default CSS class name
+// Use the default CSS class name
 const App = () => {
   const ref = useOnclickOutside(() => {
     // Do something...
@@ -123,7 +123,7 @@ const App = () => {
   );
 };
 
-// Use the CSS class name that you defined
+// Use your own CSS class name
 const App = () => {
   const ref = useOnclickOutside(
     () => {
