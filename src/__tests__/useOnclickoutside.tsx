@@ -1,24 +1,31 @@
 import React, { FC, useRef } from "react";
 import { render, fireEvent } from "@testing-library/react";
-import { renderHook } from "@testing-library/react-hooks";
 
 import useOnclickOutside, { DEFAULT_IGNORE_CLASS, Callback, Options } from "..";
 
 interface Props extends Options {
+  refOpt: boolean;
   className: string;
   callback: Callback;
 }
 
-const Compo: FC<Props> = ({ className, callback, ...options }: Props) => {
+const Compo: FC<Props> = ({
+  refOpt,
+  className,
+  callback,
+  ...options
+}: Props) => {
   const ref1 = useRef<HTMLDivElement>();
   const ref2 = useRef<HTMLDivElement>();
-
-  useOnclickOutside([ref1, ref2], callback, options);
+  const ref = useOnclickOutside(callback, {
+    ...options,
+    refs: refOpt && [ref1, ref2],
+  });
 
   return (
     <>
-      <div data-testid="ref-1" ref={ref1} />
-      <div data-testid="ref-2" ref={ref2} />
+      <div data-testid="ref-1" ref={refOpt ? ref1 : ref} />
+      <div data-testid="ref-2" ref={refOpt ? ref2 : ref} />
       <div data-testid="out-1" />
       <div className={className || DEFAULT_IGNORE_CLASS} data-testid="out-2">
         <div data-testid="out-3" />
@@ -34,6 +41,7 @@ describe("useOnclickOutside", () => {
   });
 
   interface Args extends Options {
+    refOpt?: boolean;
     className?: string;
   }
   interface Return {
@@ -42,6 +50,7 @@ describe("useOnclickOutside", () => {
   }
 
   const renderHelper = ({
+    refOpt = false,
     className,
     disabled = false,
     eventTypes = ["mousedown", "touchstart"],
@@ -50,6 +59,7 @@ describe("useOnclickOutside", () => {
     const cb = jest.fn();
     const { getByTestId } = render(
       <Compo
+        refOpt={refOpt}
         className={className}
         callback={cb}
         disabled={disabled}
@@ -61,8 +71,24 @@ describe("useOnclickOutside", () => {
     return { cb, getByTestId };
   };
 
-  it("should not trigger callback when clicks (touches) inside of the target refs", () => {
+  it("should not trigger callback when clicks (touches) inside of the targets", () => {
     const { cb, getByTestId } = renderHelper();
+    const ref1 = getByTestId("ref-1");
+    const ref2 = getByTestId("ref-2");
+
+    fireEvent.mouseDown(ref1);
+    fireEvent.touchStart(ref1);
+
+    expect(cb).not.toHaveBeenCalled();
+
+    fireEvent.mouseDown(ref2);
+    fireEvent.touchStart(ref2);
+
+    expect(cb).not.toHaveBeenCalled();
+  });
+
+  it("should not trigger callback when clicks (touches) inside of the targets with refs option", () => {
+    const { cb, getByTestId } = renderHelper({ refOpt: true });
     const ref1 = getByTestId("ref-1");
     const ref2 = getByTestId("ref-2");
 
@@ -101,7 +127,7 @@ describe("useOnclickOutside", () => {
     expect(cb).not.toHaveBeenCalled();
   });
 
-  it("should trigger callback when clicks outside (touches) of the target refs", () => {
+  it("should trigger callback when clicks outside (touches) of the targets", () => {
     const { cb, getByTestId } = renderHelper();
     const out = getByTestId("out-1");
 
@@ -152,13 +178,5 @@ describe("useOnclickOutside", () => {
     fireEvent.mouseDown(out, { clientY: 90 });
 
     expect(cb).toHaveBeenCalledTimes(2);
-  });
-
-  it("should return null from the beginning in ssr", () => {
-    document.createElement = null;
-
-    const { result } = renderHook(() => useOnclickOutside(null, () => null));
-
-    expect(result.current).toBeUndefined();
   });
 });

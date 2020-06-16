@@ -1,24 +1,23 @@
 declare module "react-cool-onclickoutside" {
   import { RefObject } from "react";
 
-  type Ref = RefObject<HTMLElement>;
-
   export interface Callback<T extends Event = Event> {
     (event: T): void;
   }
 
   interface Options {
+    refs?: RefObject<HTMLElement>[];
     disabled?: boolean;
     eventTypes?: string[];
     excludeScrollbar?: boolean;
     ignoreClass?: string;
   }
 
-  const useOnclickOutside: (
-    ref: Ref | Ref[],
-    callback: Callback,
-    options?: Options
-  ) => void;
+  interface Return {
+    (element: HTMLElement): void;
+  }
+
+  const useOnclickOutside: (callback: Callback, options?: Options) => Return;
 
   export default useOnclickOutside;
 }

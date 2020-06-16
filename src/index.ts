@@ -1,18 +1,23 @@
-import { RefObject, useRef, useEffect } from "react";
+import { RefObject, useRef, useState, useEffect, useCallback } from "react";
 
 import canUsePassiveEvents from "./canUsePassiveEvents";
 
 export const DEFAULT_IGNORE_CLASS = "ignore-onclickoutside";
 
-type Ref = RefObject<HTMLElement>;
 export interface Callback<T extends Event = Event> {
   (event: T): void;
 }
+type El = HTMLElement;
+type Refs = RefObject<El>[];
 export interface Options {
+  refs?: Refs;
   disabled?: boolean;
   eventTypes?: string[];
   excludeScrollbar?: boolean;
   ignoreClass?: string;
+}
+interface Return {
+  (element: El): void;
 }
 
 const hasIgnoreClass = (e: any, ignoreClass: string): boolean => {
@@ -34,60 +39,78 @@ const getEventOptions = (type: string): { passive: boolean } | boolean =>
   type.includes("touch") && canUsePassiveEvents() ? { passive: true } : false;
 
 const useOnclickOutside = (
-  ref: Ref | Ref[],
   callback: Callback,
   {
+    refs: refsOpt,
     disabled = false,
     eventTypes = ["mousedown", "touchstart"],
     excludeScrollbar = false,
     ignoreClass = DEFAULT_IGNORE_CLASS,
   }: Options = {}
-): void => {
+): Return => {
   const callbackRef = useRef<Callback>(callback);
+  const [refsState, setRefsState] = useState<Refs>([]);
 
   useEffect(() => {
     callbackRef.current = callback;
   }, [callback]);
 
-  useEffect(() => {
-    if (!ref) return;
+  const ref: Return = useCallback((el) => {
+    setRefsState((prevState) => [...prevState, { current: el }]);
+  }, []);
 
-    const handler = (e: any): void => {
-      if (hasIgnoreClass(e, ignoreClass)) return;
+  useEffect(
+    () => {
+      if (!refsOpt?.length && !refsState.length) return;
 
-      const refs = Array.isArray(ref) ? ref : [ref];
-      const els: HTMLElement[] = [];
-      refs.forEach(({ current }) => {
-        if (current) els.push(current);
-      });
+      const listener = (e: any): void => {
+        if (hasIgnoreClass(e, ignoreClass)) return;
 
-      if (excludeScrollbar && clickedOnScrollbar(e)) return;
-      if (!els.length || !els.every((el) => !el.contains(e.target))) return;
+        const refs = refsOpt || refsState;
+        const els: El[] = [];
+        refs.forEach(({ current }) => {
+          if (current) els.push(current);
+        });
 
-      callbackRef.current(e);
-    };
+        if (excludeScrollbar && clickedOnScrollbar(e)) return;
+        if (!els.length || !els.every((el) => !el.contains(e.target))) return;
 
-    const removeEventListener = (): void => {
+        callbackRef.current(e);
+      };
+
+      const removeEventListener = (): void => {
+        eventTypes.forEach((type) => {
+          // @ts-ignore
+          document.removeEventListener(type, listener, getEventOptions(type));
+        });
+      };
+
+      if (disabled) {
+        removeEventListener();
+        return;
+      }
+
       eventTypes.forEach((type) => {
-        // @ts-ignore
-        document.removeEventListener(type, handler, getEventOptions(type));
+        document.addEventListener(type, listener, getEventOptions(type));
       });
-    };
 
-    if (disabled) {
-      removeEventListener();
-      return;
-    }
+      // eslint-disable-next-line consistent-return
+      return (): void => {
+        removeEventListener();
+      };
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [
+      refsState,
+      ignoreClass,
+      excludeScrollbar,
+      disabled,
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      JSON.stringify(eventTypes),
+    ]
+  );
 
-    eventTypes.forEach((type) => {
-      document.addEventListener(type, handler, getEventOptions(type));
-    });
-
-    // eslint-disable-next-line consistent-return
-    return (): void => {
-      removeEventListener();
-    };
-  }, [ref, ignoreClass, excludeScrollbar, disabled, eventTypes]);
+  return ref;
 };
 
 export default useOnclickOutside;
