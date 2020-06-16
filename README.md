@@ -25,9 +25,10 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 - ⛔ Scrollbar can be excluded from the callback of outside clicks.
 - 🙈 [Ignores certain elements](#ignore-elements-by-css-class-name) during the event loop.
 - 🙉 Enables you to [stop listening for outside clicks](#disabling-the-event-listener) when needed.
+- 🔩 Supports custom `refs` for [some reasons](#use-your-own-ref).
 - 📜 Supports [TypeScript](https://www.typescriptlang.org) type definition.
 - 🗄️ Server-side rendering compatibility.
-- 🦠 Tiny size ([< 1KB gzipped](https://bundlephobia.com/result?p=react-cool-onclickoutside)). No external dependencies, aside for the `react`.
+- 🦠 Tiny size ([~ 1.4KB gzipped](https://bundlephobia.com/result?p=react-cool-onclickoutside)). No external dependencies, aside for the `react`.
 
 ## Requirement
 
@@ -48,14 +49,12 @@ $ npm install --save react-cool-onclickoutside
 Common use case.
 
 ```js
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import useOnclickOutside from "react-cool-onclickoutside";
 
 const Dropdown = () => {
   const [openMenu, setOpenMenu] = useState(false);
-  const ref = useRef();
-
-  useOnclickOutside(ref, () => {
+  const ref = useOnclickOutside(() => {
     setOpenMenu(false);
   });
 
@@ -77,15 +76,12 @@ const Dropdown = () => {
 Support multiple refs. Callback only be triggered when user clicks outside of the registered components.
 
 ```js
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import useOnclickOutside from "react-cool-onclickoutside";
 
 const App = () => {
   const [showTips, setShowTips] = useState(true);
-  const t1Ref = useRef();
-  const t2Ref = useRef();
-
-  useOnclickOutside([t1Ref, t2Ref], () => {
+  const ref = useOnclickOutside(() => {
     setShowTips(false);
   });
 
@@ -93,8 +89,8 @@ const App = () => {
     <div>
       {showTips && (
         <>
-          <div ref={t1Ref}>Tooltip 1</div>
-          <div ref={t2Ref}>Tooltip 2</div>
+          <div ref={ref}>Tooltip 1</div>
+          <div ref={ref}>Tooltip 2</div>
         </>
       )}
     </div>
@@ -107,14 +103,12 @@ const App = () => {
 You can tell `react-cool-onclickoutside` to ignore certain elements during the event loop by the `ignore-onclickoutside` CSS class name. If you want explicit control over the class name, use the `ignoreClass` option.
 
 ```js
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import useOnclickOutside from "react-cool-onclickoutside";
 
 // Use default CSS class name
 const App = () => {
-  const ref = useRef();
-
-  useOnclickOutside(ref, () => {
+  const ref = useOnclickOutside(() => {
     // Do something...
   });
 
@@ -131,10 +125,7 @@ const App = () => {
 
 // Use the CSS class name that you defined
 const App = () => {
-  const ref = useRef();
-
-  useOnclickOutside(
-    ref,
+  const ref = useOnclickOutside(
     () => {
       // Do something...
     },
@@ -158,15 +149,12 @@ const App = () => {
 In case you want to disable the event listener for performance reasons or fulfill some use cases. We provide the `disabled` option for you. Once you set it as `true`, the callback won’t be triggered.
 
 ```js
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import useOnclickOutside from "react-cool-onclickoutside";
 
 const App = () => {
   const [disabled, setDisabled] = useState(false);
-  const ref = useRef();
-
-  useOnclickOutside(
-    ref,
+  const ref = useOnclickOutside(
     () => {
       // Do something...
     },
@@ -188,18 +176,28 @@ const App = () => {
 };
 ```
 
+## Use Your Own `ref`
+
+In case of you had a ref already or you want to share a ref for other purposes. You can pass in the ref instead of using the one provided by this hook.
+
+```js
+const ref = useRef();
+
+useOnclickOutside(
+  () => {
+    // Do something...
+  },
+  { refs: [ref] }
+);
+```
+
 ## API
 
 ```js
-type Ref = RefObject<HTMLElement>;
-type Callback = (event?: Event) => void;
-
-useOnclickOutside(ref: Ref | Ref[], callback: Callback, options?: object);
+const ref = useOnclickOutside(callback: (event: Event) => void, options?: object);
 ```
 
-### Parameters
-
-You must pass the `ref` and `callback` to use this hook and you can access the `event` object via the callback parameter, default will be [MouseEvent](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent) or [TouchEvent](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent).
+You must register the `ref` and pass the `callback` to use this hook. Moreover you can access the `event` object via the callback's parameter, default will be [MouseEvent](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent) or [TouchEvent](https://developer.mozilla.org/en-US/docs/Web/API/TouchEvent).
 
 ```js
 const callback = (event) => {
@@ -207,14 +205,15 @@ const callback = (event) => {
 };
 ```
 
-The `options` object may contain the following keys.
+The `options` object contains the following keys.
 
-| Key                | Type    | Default                       | Description                                                                              |
-| ------------------ | ------- | ----------------------------- | ---------------------------------------------------------------------------------------- |
-| `disabled`         | boolean | `false`                       | Enable/disable the event listener.                                                       |
-| `eventTypes`       | Array   | `['mousedown', 'touchstart']` | Which events to listen for.                                                              |
-| `excludeScrollbar` | boolean | `false`                       | Whether or not to listen (ignore) to browser scrollbar clicks.                           |
-| `ignoreClass`      | string  | `ignore-onclickoutside`       | To ignore certain elements during the event loop by the CSS class name that you defined. |
+| Key                | Type    | Default                       | Description                                                                                             |
+| ------------------ | ------- | ----------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `refs`             | Array   |                               | For [some reasons](#use-your-own-ref), you can pass in your own `ref(s)` instead of using the built-in. |
+| `disabled`         | boolean | `false`                       | Enable/disable the event listener.                                                                      |
+| `eventTypes`       | Array   | `['mousedown', 'touchstart']` | Which events to listen for.                                                                             |
+| `excludeScrollbar` | boolean | `false`                       | Whether or not to listen (ignore) to browser scrollbar clicks.                                          |
+| `ignoreClass`      | string  | `ignore-onclickoutside`       | To ignore certain elements during the event loop by the CSS class name that you defined.                |
 
 ## Inspiration
 
