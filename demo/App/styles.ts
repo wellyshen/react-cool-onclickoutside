@@ -44,7 +44,7 @@ export const dropdown = css`
 export const dropdownBtn = css`
   padding: 0.375rem 0.75rem;
   border-radius: 0.25rem;
-  border-color: #6c757d;
+  border: 1px solid #6c757d;
   line-height: 1.5;
   color: #fff;
   background: #6c757d;
