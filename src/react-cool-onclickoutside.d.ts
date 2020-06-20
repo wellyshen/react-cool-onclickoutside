@@ -14,7 +14,7 @@ declare module "react-cool-onclickoutside" {
   }
 
   interface Return {
-    (element: HTMLElement): void;
+    (element: HTMLElement | null): void;
   }
 
   const useOnclickOutside: (callback: Callback, options?: Options) => Return;
