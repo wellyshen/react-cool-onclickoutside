@@ -17,7 +17,7 @@ export interface Options {
   ignoreClass?: string;
 }
 interface Return {
-  (element: El): void;
+  (element: El | null): void;
 }
 
 const hasIgnoreClass = (e: any, ignoreClass: string): boolean => {
