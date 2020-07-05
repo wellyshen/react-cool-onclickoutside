@@ -146,7 +146,7 @@ const App = () => {
 
 ## Disabling the Event Listener
 
-In case you want to disable the event listener for performance reasons or fulfill some use cases. We provide the `disabled` option for you. Once you set it as `true`, the callback won’t be triggered.
+In case you want to disable the event listener for performance reasons or fulfill some use cases. We provide the `disabled` option for you. Once you set it to `true`, the callback won’t be triggered.
 
 ```js
 import React, { useState } from "react";
