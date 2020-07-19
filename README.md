@@ -230,12 +230,12 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="https://wellyshen.com"><img src="https://avatars1.githubusercontent.com/u/21308003?v=4" width="100px;" alt=""/><br /><sub><b>Welly</b></sub></a><br /><a href="https://github.com/wellyshen/react-cool-onclickoutside/commits?author=wellyshen" title="Code">💻</a> <a href="https://github.com/wellyshen/react-cool-onclickoutside/commits?author=wellyshen" title="Documentation">📖</a> <a href="#maintenance-wellyshen" title="Maintenance">🚧</a></td>
     <td align="center"><a href="https://github.com/DmitryScaletta"><img src="https://avatars1.githubusercontent.com/u/5096735?v=4" width="100px;" alt=""/><br /><sub><b>DmitryScaletta</b></sub></a><br /><a href="https://github.com/wellyshen/react-cool-onclickoutside/issues?q=author%3ADmitryScaletta" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/vardani"><img src="https://avatars2.githubusercontent.com/u/58708973?v=4" width="100px;" alt=""/><br /><sub><b>vardani</b></sub></a><br /><a href="https://github.com/wellyshen/react-cool-onclickoutside/issues?q=author%3Avardani" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
