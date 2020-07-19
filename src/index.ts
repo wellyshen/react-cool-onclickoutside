@@ -24,9 +24,8 @@ const hasIgnoreClass = (e: any, ignoreClass: string): boolean => {
   let el = e.target;
 
   while (el) {
-    // el.classList != null checks both for null and
-    // undefined since it's not a strict comparison
-    if (el && el.classList != null && el.classList.contains(ignoreClass)) return true;
+    // Skip return when the classList doesn't exist
+    if (el.classList?.contains(ignoreClass)) return true;
     el = el.parentElement;
   }
 
