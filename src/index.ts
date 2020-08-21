@@ -80,7 +80,7 @@ const useOnclickOutside = (
 
       const removeEventListener = (): void => {
         eventTypes.forEach((type) => {
-          // @ts-ignore
+          // @ts-expect-error
           document.removeEventListener(type, listener, getEventOptions(type));
         });
       };
