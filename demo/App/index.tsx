@@ -42,7 +42,7 @@ const App: FC = () => {
       />
       <div css={container}>
         <GitHubCorner url="https://github.com/wellyshen/react-cool-onclickoutside" />
-        <h1 css={title}>React Cool Onclickoutside</h1>
+        <h1 css={title}>REACT COOL ONCLICKOUTSIDE</h1>
         <p css={subtitle}>
           React hook to listen for clicks outside of the component(s).
         </p>

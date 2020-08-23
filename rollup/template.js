@@ -9,10 +9,10 @@ export default ({ files }) => `
       <meta name="theme-color" content="#000000" />
       <link rel="apple-touch-icon" href="assets/logo192.png" />
       <link rel="manifest" href="assets/manifest.json" />
-      <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Roboto&display=swap" rel="stylesheet">
       <link rel="stylesheet" href=${files.css[0].fileName} />
-      <title>React Cool Onclickoutside</title>
-      <meta property="og:title" content="React Cool Onclickoutside" />
+      <title>REACT COOL ONCLICKOUTSIDE</title>
+      <meta property="og:title" content="REACT COOL ONCLICKOUTSIDE" />
       <meta property="og:type" content="website" />
       <meta property="og:image" content="https://react-cool-onclickoutside.netlify.app/assets/og_image.png" />
       <meta property="og:description" content="React hook to listen for clicks outside of the component(s)." />
