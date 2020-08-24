@@ -89,7 +89,7 @@ export const dropdownMenu = css`
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.15);
   text-align: left;
-  transform: translate3d(0, 73px, 0);
+  transform: translate3d(0, 74px, 0);
   cursor: pointer;
 `;
 

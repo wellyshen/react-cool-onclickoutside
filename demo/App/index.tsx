@@ -48,18 +48,18 @@ const App: FC = () => {
         </p>
         <div css={dropdown} ref={ref}>
           <button css={dropdownBtn} onClick={handleBtnClick} type="button">
-            Dropdown button
+            DROPDOWN BUTTON
           </button>
           {openMenu && (
             <div css={dropdownMenu} onClick={closeMenu}>
               <a css={dropdownItem} href="#">
-                Action 1
+                ACTION 1
               </a>
               <a css={dropdownItem} href="#">
-                Action 2
+                ACTION 2
               </a>
               <a css={dropdownItem} href="#">
-                Action 3
+                ACTION 3
               </a>
             </div>
           )}
