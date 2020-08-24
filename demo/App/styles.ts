@@ -55,19 +55,18 @@ export const dropdown = css`
 
 export const dropdownBtn = css`
   padding: 1rem 2rem;
-  border: 1px solid #6c757d;
+  border: none;
   line-height: 1.5;
   color: #fff;
-  background: #6c757d;
+  background: #000;
   cursor: pointer;
   transition: background 0.15s ease;
   &:hover {
-    border-color: #5a6268;
-    background: #5a6268;
+    background: #333;
   }
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 0.3rem rgba(130, 138, 145, 0.5);
+    box-shadow: 0 0 0 5px rgba(130, 138, 145, 0.5);
   }
   &::after {
     content: "";
@@ -85,21 +84,23 @@ export const dropdownMenu = css`
   display: inline-block;
   position: absolute;
   left: 0;
-  padding: 1rem 0;
   width: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 10px solid #333;
   text-align: left;
-  transform: translate3d(0, 74px, 0);
+  background: #333;
+  transform: translate3d(0, 73px, 0);
+  box-sizing: border-box;
   cursor: pointer;
 `;
 
 export const dropdownItem = css`
   display: block;
   padding: 1rem 2rem;
-  color: #212529;
+  color: #fff;
   line-height: 1.5;
   text-decoration: none;
   &:hover {
-    background: #f8f9fa;
+    color: #000;
+    background: #fff;
   }
 `;
