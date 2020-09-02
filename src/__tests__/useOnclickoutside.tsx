@@ -19,12 +19,15 @@ const Compo: FC<Props> = ({
   const ref2 = useRef<HTMLDivElement>();
   const ref = useOnclickOutside(callback, {
     ...options,
+    // @ts-expect-error
     refs: refOpt && [ref1, ref2],
   });
 
   return (
     <>
+      {/* @ts-expect-error */}
       <div data-testid="ref-1" ref={refOpt ? ref1 : ref} />
+      {/* @ts-expect-error */}
       <div data-testid="ref-2" ref={refOpt ? ref2 : ref} />
       <div data-testid="out-1" />
       <div className={className || DEFAULT_IGNORE_CLASS} data-testid="out-2">
@@ -60,7 +63,7 @@ describe("useOnclickOutside", () => {
     const { getByTestId } = render(
       <Compo
         refOpt={refOpt}
-        className={className}
+        className={className || ""}
         callback={cb}
         disabled={disabled}
         eventTypes={eventTypes}

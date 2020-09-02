@@ -2,6 +2,7 @@ import canUsePassiveEvents from "../canUsePassiveEvents";
 
 describe("canUsePassiveEvents", () => {
   it("should get false in ssr", () => {
+    // @ts-expect-error
     window.addEventListener = undefined;
 
     expect(canUsePassiveEvents()).toBeFalsy();

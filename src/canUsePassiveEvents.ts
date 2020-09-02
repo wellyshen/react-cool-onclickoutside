@@ -12,7 +12,7 @@ export default (): boolean => {
       passive = true;
     },
   });
-  const noop = (): void => null;
+  const noop = () => null;
 
   window.addEventListener("test", noop, options);
   window.removeEventListener("test", noop, options);
