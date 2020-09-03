@@ -20,11 +20,11 @@ import {
 const App: FC = () => {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
 
-  const handleBtnClick = (): void => {
+  const handleBtnClick = () => {
     setOpenMenu(!openMenu);
   };
 
-  const closeMenu = (): void => {
+  const closeMenu = () => {
     setOpenMenu(false);
   };
 

@@ -63,7 +63,7 @@ const useOnclickOutside = (
     () => {
       if (!refsOpt?.length && !refsState.length) return;
 
-      const listener = (e: any): void => {
+      const listener = (e: any) => {
         if (hasIgnoreClass(e, ignoreClass)) return;
 
         const refs = refsOpt || refsState;
@@ -78,7 +78,7 @@ const useOnclickOutside = (
         callbackRef.current(e);
       };
 
-      const removeEventListener = (): void => {
+      const removeEventListener = () => {
         eventTypes.forEach((type) => {
           // @ts-expect-error
           document.removeEventListener(type, listener, getEventOptions(type));
@@ -95,7 +95,7 @@ const useOnclickOutside = (
       });
 
       // eslint-disable-next-line consistent-return
-      return (): void => {
+      return () => {
         removeEventListener();
       };
     },
