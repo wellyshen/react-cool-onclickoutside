@@ -55,7 +55,7 @@ const plugins = [
   isDev && livereload(),
   !isDev && sizeSnapshot(),
   // Disable "module" to avoid the missing semicolon bug of .esm
-  !isDev && terser({ module: false }),
+  !isDev && terser(),
   isDemo &&
     copy({
       targets: [{ src: "demo/.dev", dest: ".", rename: "public" }],
@@ -71,7 +71,7 @@ const plugins = [
         },
       ],
     }),
-];
+].filter(Boolean);
 
 export default {
   input: isDist ? "src" : "demo",
