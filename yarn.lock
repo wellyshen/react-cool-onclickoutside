@@ -3764,22 +3764,22 @@ eslint-config-airbnb@^18.2.0:
     object.assign "^4.1.0"
     object.entries "^1.1.2"
 
-eslint-config-prettier@^6.11.0:
-  version "6.11.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-6.11.0.tgz#f6d2238c1290d01c859a8b5c1f7d352a0b0da8b1"
-  integrity sha512-oB8cpLWSAjOVFEJhhyMZh6NOEOtBVziaqdDQ86+qhDHFbZXoRTM7pNSvFRfW/W/L/LrQ38C99J5CGuRBBzBsdA==
+eslint-config-prettier@^6.12.0:
+  version "6.12.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-6.12.0.tgz#9eb2bccff727db1c52104f0b49e87ea46605a0d2"
+  integrity sha512-9jWPlFlgNwRUYVoujvWTQ1aMO8o6648r+K7qU7K5Jmkbyqav1fuEZC0COYpGBxyiAJb65Ra9hrmFx19xRGwXWw==
   dependencies:
     get-stdin "^6.0.0"
 
 eslint-config-welly@^1.4.8:
-  version "1.4.8"
-  resolved "https://registry.yarnpkg.com/eslint-config-welly/-/eslint-config-welly-1.4.8.tgz#88c8853b0b90a8f303e6e6b53d64241fa4295054"
-  integrity sha512-Tyfxuacu/G67Mv3Clw3Vacnkj9FSGODrDlK/6uJlN4fJZbV0qg+dYlbmc7SGPVMLrcCmwsUnV1jDvYtrITKm4g==
+  version "1.4.9"
+  resolved "https://registry.yarnpkg.com/eslint-config-welly/-/eslint-config-welly-1.4.9.tgz#f516e76c210ae81db96142b00aa5a51d66c568d5"
+  integrity sha512-QyL8Y5P+jn0F0UIDmi1CzemKimf6nHICnVc64dXIRRGPlAQe+wy9JDIM9inL7wErCEPuFXeZpa1/cubsJ/LZBA==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^4.2.0"
     "@typescript-eslint/parser" "^4.2.0"
     eslint-config-airbnb "^18.2.0"
-    eslint-config-prettier "^6.11.0"
+    eslint-config-prettier "^6.12.0"
     eslint-import-resolver-typescript "^2.3.0"
     eslint-plugin-compat "^3.8.0"
     eslint-plugin-emotion "^10.0.27"
