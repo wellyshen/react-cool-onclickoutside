@@ -48,7 +48,7 @@ const useOnclickOutside = (
     ignoreClass = DEFAULT_IGNORE_CLASS,
   }: Options = {}
 ): Return => {
-  const callbackRef = useRef<Callback>(callback);
+  const callbackRef = useRef(callback);
   const [refsState, setRefsState] = useState<Refs>([]);
 
   useEffect(() => {
