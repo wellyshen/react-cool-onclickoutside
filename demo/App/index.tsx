@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions, jsx-a11y/anchor-is-valid */
 
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import { Global, css } from "@emotion/react";
 import normalize from "normalize.css";
 

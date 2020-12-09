@@ -1,4 +1,4 @@
-import React, { FC, useRef } from "react";
+import { FC, useRef } from "react";
 import { render, fireEvent } from "@testing-library/react";
 
 import useOnclickOutside, { DEFAULT_IGNORE_CLASS, Callback, Options } from "..";
