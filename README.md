@@ -28,7 +28,7 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 - 🔩 Supports custom `refs` for [some reasons](#use-your-own-ref).
 - 📜 Supports [TypeScript](https://www.typescriptlang.org) type definition.
 - 🗄️ Server-side rendering compatibility.
-- 🦠 Tiny size ([~ 0.8KB gzipped](https://bundlephobia.com/result?p=react-cool-onclickoutside)). No external dependencies, aside for the `react`.
+- 🦔 Tiny size ([~ 0.8KB gzipped](https://bundlephobia.com/result?p=react-cool-onclickoutside)). No external dependencies, aside for the `react`.
 
 ## Requirement
 
