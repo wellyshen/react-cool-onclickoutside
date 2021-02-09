@@ -35,7 +35,14 @@ const Compo: FC<Props> = ({
       <div data-testid="out-2" className={className || DEFAULT_IGNORE_CLASS}>
         <div data-testid="out-3" />
       </div>
-      <iframe data-testid="iframe-1" src="url" title="iframe-1" />
+      <iframe data-testid="iframe-1" src="url" title="iframe-1" ref={ref} />
+      <iframe
+        data-testid="iframe-2"
+        src="url"
+        title="iframe-2"
+        className={DEFAULT_IGNORE_CLASS}
+      />
+      <iframe data-testid="iframe-3" src="url" title="iframe-3" />
     </>
   );
 };
@@ -77,7 +84,7 @@ describe("useOnclickOutside", () => {
   const { getByTestId } = screen;
 
   it.each(["method", "option"])(
-    "should not trigger callback when clicks/touches inside of the target with ref(s) %s",
+    "should not trigger callback when clicking/touching inside of the target with ref(s) %s",
     (type) => {
       const cb = renderHelper({ refOpt: type === "option" });
       const ref1 = getByTestId("ref-1");
@@ -99,7 +106,7 @@ describe("useOnclickOutside", () => {
   );
 
   it.each(["default", "specified"])(
-    "should not trigger callback when clicks an element with %s ignore class",
+    "should not trigger callback when clicking an element with %s ignore class",
     (type) => {
       const cb = renderHelper({
         ignoreClass: type === "specified" ? "my-ignore-class" : undefined,
@@ -114,7 +121,7 @@ describe("useOnclickOutside", () => {
     }
   );
 
-  it("should trigger callback when clicks/touches outside of the targets", () => {
+  it("should trigger callback when clicking/touching outside of the targets", () => {
     const cb = renderHelper();
     const out = getByTestId("out-1");
 
@@ -147,7 +154,7 @@ describe("useOnclickOutside", () => {
     expect(cb).not.toHaveBeenCalled();
   });
 
-  it("should not trigger callback when clicks inside of the scrollbar", () => {
+  it("should not trigger callback when clicking inside of the scrollbar", () => {
     const cb = renderHelper({ excludeScrollbar: true });
     const out = getByTestId("out-1");
 
@@ -157,7 +164,7 @@ describe("useOnclickOutside", () => {
     expect(cb).not.toHaveBeenCalled();
   });
 
-  it("should trigger callback when clicks outside of the scrollbar", () => {
+  it("should trigger callback when clicking outside of the scrollbar", () => {
     const cb = renderHelper({ excludeScrollbar: true });
     const out = getByTestId("out-1");
 
@@ -165,6 +172,34 @@ describe("useOnclickOutside", () => {
     fireEvent.mouseDown(out, { clientY: 90 });
 
     expect(cb).toHaveBeenCalledTimes(2);
+  });
+
+  it("should trigger callback when clicking on the iframe correctly", () => {
+    jest.useFakeTimers();
+
+    const cb = renderHelper();
+    fireEvent(window, new Event("blur"));
+    jest.runAllTimers();
+
+    expect(cb).not.toHaveBeenCalled();
+
+    getByTestId("iframe-1").focus();
+    fireEvent(window, new Event("blur"));
+    jest.runAllTimers();
+
+    expect(cb).not.toHaveBeenCalled();
+
+    getByTestId("iframe-2").focus();
+    fireEvent(window, new Event("blur"));
+    jest.runAllTimers();
+
+    expect(cb).not.toHaveBeenCalled();
+
+    getByTestId("iframe-3").focus();
+    fireEvent(window, new Event("blur"));
+    jest.runAllTimers();
+
+    expect(cb).toHaveBeenCalled();
   });
 
   it('should disable "detectIFrame"', () => {
