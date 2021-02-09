@@ -11,6 +11,7 @@ declare module "react-cool-onclickoutside" {
     eventTypes?: string[];
     excludeScrollbar?: boolean;
     ignoreClass?: string;
+    detectIFrame?: boolean;
   }
 
   interface Return {
