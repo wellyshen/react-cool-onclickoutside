@@ -15,13 +15,14 @@ export interface Options {
   eventTypes?: string[];
   excludeScrollbar?: boolean;
   ignoreClass?: string;
+  detectIFrame?: boolean;
 }
 interface Return {
   (element: El | null): void;
 }
 
 const hasIgnoreClass = (e: any, ignoreClass: string): boolean => {
-  let el = e.target;
+  let el = e.target || e;
 
   while (el) {
     if (el.classList?.contains(ignoreClass)) return true;
@@ -46,6 +47,7 @@ const useOnclickOutside = (
     eventTypes = ["mousedown", "touchstart"],
     excludeScrollbar = false,
     ignoreClass = DEFAULT_IGNORE_CLASS,
+    detectIFrame = true,
   }: Options = {}
 ): Return => {
   const callbackRef = useRef(callback);
@@ -55,34 +57,49 @@ const useOnclickOutside = (
     callbackRef.current = callback;
   }, [callback]);
 
-  const ref: Return = useCallback((el) => {
-    setRefsState((prevState) => [...prevState, { current: el }]);
-  }, []);
+  const ref: Return = useCallback(
+    (el) => setRefsState((prevState) => [...prevState, { current: el }]),
+    []
+  );
 
   useEffect(
     () => {
       if (!refsOpt?.length && !refsState.length) return;
 
-      const listener = (e: any) => {
-        if (hasIgnoreClass(e, ignoreClass)) return;
+      const els: El[] = [];
+      (refsOpt || refsState).forEach(
+        ({ current }) => current && els.push(current)
+      );
 
-        const refs = refsOpt || refsState;
-        const els: El[] = [];
-        refs.forEach(({ current }) => {
-          if (current) els.push(current);
-        });
-
-        if (excludeScrollbar && clickedOnScrollbar(e)) return;
-        if (!els.length || !els.every((el) => !el.contains(e.target))) return;
-
-        callbackRef.current(e);
+      const handler = (e: any) => {
+        if (
+          !hasIgnoreClass(e, ignoreClass) &&
+          !(excludeScrollbar && clickedOnScrollbar(e)) &&
+          els.every((el) => !el.contains(e.target))
+        )
+          callbackRef.current(e);
       };
 
+      const blurHandler = (e: FocusEvent) =>
+        // On firefox the iframe becomes document.activeElement in the next event loop
+        setTimeout(() => {
+          const { activeElement } = document;
+
+          if (
+            activeElement?.tagName === "IFRAME" &&
+            !hasIgnoreClass(activeElement, ignoreClass) &&
+            !els.includes(activeElement as HTMLIFrameElement)
+          )
+            callbackRef.current(e);
+        }, 0);
+
       const removeEventListener = () => {
-        eventTypes.forEach((type) => {
+        eventTypes.forEach((type) =>
           // @ts-expect-error
-          document.removeEventListener(type, listener, getEventOptions(type));
-        });
+          document.removeEventListener(type, handler, getEventOptions(type))
+        );
+
+        if (detectIFrame) window.removeEventListener("blur", blurHandler);
       };
 
       if (disabled) {
@@ -90,14 +107,14 @@ const useOnclickOutside = (
         return;
       }
 
-      eventTypes.forEach((type) => {
-        document.addEventListener(type, listener, getEventOptions(type));
-      });
+      eventTypes.forEach((type) =>
+        document.addEventListener(type, handler, getEventOptions(type))
+      );
+
+      if (detectIFrame) window.addEventListener("blur", blurHandler);
 
       // eslint-disable-next-line consistent-return
-      return () => {
-        removeEventListener();
-      };
+      return () => removeEventListener();
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [
@@ -105,6 +122,7 @@ const useOnclickOutside = (
       ignoreClass,
       excludeScrollbar,
       disabled,
+      detectIFrame,
       // eslint-disable-next-line react-hooks/exhaustive-deps
       JSON.stringify(eventTypes),
     ]

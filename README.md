@@ -24,11 +24,12 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 - 🧻 Uses [passive event listeners](https://developers.google.com/web/tools/lighthouse/audits/passive-event-listeners) to improve scrolling performance.
 - ⛔ Scrollbar can be excluded from the callback of outside clicks.
 - 🙈 [Ignores certain elements](#ignore-elements-by-css-class-name) during the event loop.
+- 🪟 [Detects iframe clicks](#detecting-iframe-clicks) for better DX.
 - 🙉 Enables you to [stop listening for outside clicks](#disabling-the-event-listener) when needed.
 - 🔩 Supports custom `refs` for [some reasons](#use-your-own-ref).
 - 📜 Supports [TypeScript](https://www.typescriptlang.org) type definition.
 - 🗄️ Server-side rendering compatibility.
-- 🦔 Tiny size ([~ 0.8KB gzipped](https://bundlephobia.com/result?p=react-cool-onclickoutside)). No external dependencies, aside for the `react`.
+- 🦔 Tiny size ([< 1KB gzipped](https://bundlephobia.com/result?p=react-cool-onclickoutside)). No external dependencies, aside for the `react`.
 
 ## Requirement
 
@@ -191,6 +192,17 @@ useOnclickOutside(
 );
 ```
 
+## Detecting Iframe Clicks
+
+Clicks on an `<iframe>` element won't trigger `document.documentElement` listeners, because it's literally different page with different security domain. However, when clicking on an iframe moves `focus` to its content's window that triggers the main [window.blur](https://developer.mozilla.org/en-US/docs/Web/API/Window/blur_event) event. `react-cool-onclickoutside` in conjunction the `blur` event with [document.activeElement](https://developer.mozilla.org/en-US/docs/Web/API/DocumentOrShadowRoot/activeElement) to detect if an iframe is clicked, and execute the provided callback.
+
+The above-mentioned workaround has its caveats:
+
+- Clicks on an iframe will only trigger the provided callback once. Subsequent clicks on iframe will not trigger the callback until focus has been moved back to main window.
+- Move focus to iframe via keyboard navigation also triggers the provided callback.
+
+For our convenience, this feature is enabled by default. You can optionally disable it by setting the `detectIFrame` to `false` if you find it conflicting with your use-case.
+
 ## API
 
 ```js
@@ -214,6 +226,7 @@ The `options` object contains the following keys.
 | `eventTypes`       | Array   | `['mousedown', 'touchstart']` | Which events to listen for.                                                                             |
 | `excludeScrollbar` | boolean | `false`                       | Whether or not to listen (ignore) to browser scrollbar clicks.                                          |
 | `ignoreClass`      | string  | `ignore-onclickoutside`       | To ignore certain elements during the event loop by the CSS class name that you defined.                |
+| `detectIFrame`     | boolean | `true`                        | To disable the feature of [detecting iframe clicks](#detecting-iframe-clicks).                          |
 
 ## Inspiration
 

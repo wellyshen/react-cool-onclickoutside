@@ -28,11 +28,14 @@ const Compo: FC<Props> = ({
       {/* @ts-expect-error */}
       <div data-testid="ref-1" ref={refOpt ? ref1 : ref} />
       {/* @ts-expect-error */}
-      <div data-testid="ref-2" ref={refOpt ? ref2 : ref} />
+      <div data-testid="ref-2" ref={refOpt ? ref2 : ref}>
+        <div data-testid="in-1" />
+      </div>
       <div data-testid="out-1" />
-      <div className={className || DEFAULT_IGNORE_CLASS} data-testid="out-2">
+      <div data-testid="out-2" className={className || DEFAULT_IGNORE_CLASS}>
         <div data-testid="out-3" />
       </div>
+      <iframe data-testid="iframe-1" src="url" title="iframe-1" />
     </>
   );
 };
@@ -48,6 +51,7 @@ const renderHelper = ({
   disabled = false,
   eventTypes = ["mousedown", "touchstart"],
   excludeScrollbar = false,
+  detectIFrame = true,
 }: Args = {}): (() => void) => {
   const cb = jest.fn();
   render(
@@ -58,6 +62,7 @@ const renderHelper = ({
       disabled={disabled}
       eventTypes={eventTypes}
       excludeScrollbar={excludeScrollbar}
+      detectIFrame={detectIFrame}
     />
   );
 
@@ -71,63 +76,45 @@ describe("useOnclickOutside", () => {
   });
   const { getByTestId } = screen;
 
-  it("should not trigger callback when clicks (touches) inside of the targets", () => {
-    const cb = renderHelper();
-    const ref1 = getByTestId("ref-1");
-    const ref2 = getByTestId("ref-2");
+  it.each(["method", "option"])(
+    "should not trigger callback when clicks/touches inside of the target with ref(s) %s",
+    (type) => {
+      const cb = renderHelper({ refOpt: type === "option" });
+      const ref1 = getByTestId("ref-1");
+      const ref2 = getByTestId("ref-2");
+      const in1 = getByTestId("in-1");
 
-    fireEvent.mouseDown(ref1);
-    fireEvent.touchStart(ref1);
+      fireEvent.mouseDown(ref1);
+      fireEvent.touchStart(ref1);
+      fireEvent.touchStart(in1);
 
-    expect(cb).not.toHaveBeenCalled();
+      expect(cb).not.toHaveBeenCalled();
 
-    fireEvent.mouseDown(ref2);
-    fireEvent.touchStart(ref2);
+      fireEvent.mouseDown(ref2);
+      fireEvent.touchStart(ref2);
+      fireEvent.touchStart(in1);
 
-    expect(cb).not.toHaveBeenCalled();
-  });
+      expect(cb).not.toHaveBeenCalled();
+    }
+  );
 
-  it("should not trigger callback when clicks (touches) inside of the targets with refs option", () => {
-    const cb = renderHelper({ refOpt: true });
-    const ref1 = getByTestId("ref-1");
-    const ref2 = getByTestId("ref-2");
+  it.each(["default", "specified"])(
+    "should not trigger callback when clicks an element with %s ignore class",
+    (type) => {
+      const cb = renderHelper({
+        ignoreClass: type === "specified" ? "my-ignore-class" : undefined,
+      });
+      const out2 = getByTestId("out-2");
+      const out3 = getByTestId("out-3");
 
-    fireEvent.mouseDown(ref1);
-    fireEvent.touchStart(ref1);
+      fireEvent.mouseDown(out2);
+      fireEvent.mouseDown(out3);
 
-    expect(cb).not.toHaveBeenCalled();
+      expect(cb).not.toHaveBeenCalled();
+    }
+  );
 
-    fireEvent.mouseDown(ref2);
-    fireEvent.touchStart(ref2);
-
-    expect(cb).not.toHaveBeenCalled();
-  });
-
-  it("should not trigger callback when clicks an element with default ignore class", () => {
-    const cb = renderHelper();
-    const out2 = getByTestId("out-2");
-    const out3 = getByTestId("out-2");
-
-    fireEvent.mouseDown(out2);
-    fireEvent.mouseDown(out3);
-
-    expect(cb).not.toHaveBeenCalled();
-  });
-
-  it("should not trigger callback when clicks an element with specified ignore class", () => {
-    const cb = renderHelper({
-      ignoreClass: "my-ignore-class",
-    });
-    const out2 = getByTestId("out-2");
-    const out3 = getByTestId("out-2");
-
-    fireEvent.mouseDown(out2);
-    fireEvent.mouseDown(out3);
-
-    expect(cb).not.toHaveBeenCalled();
-  });
-
-  it("should trigger callback when clicks outside (touches) of the targets", () => {
+  it("should trigger callback when clicks/touches outside of the targets", () => {
     const cb = renderHelper();
     const out = getByTestId("out-1");
 
@@ -178,5 +165,25 @@ describe("useOnclickOutside", () => {
     fireEvent.mouseDown(out, { clientY: 90 });
 
     expect(cb).toHaveBeenCalledTimes(2);
+  });
+
+  it('should disable "detectIFrame"', () => {
+    window.addEventListener = jest.fn();
+    renderHelper({ detectIFrame: false });
+    const iframe = getByTestId("iframe-1");
+    fireEvent.mouseDown(iframe);
+
+    expect(window.addEventListener).not.toHaveBeenCalledWith(
+      "blur",
+      expect.any(Function)
+    );
+
+    renderHelper();
+    fireEvent.mouseDown(iframe);
+
+    expect(window.addEventListener).toHaveBeenCalledWith(
+      "blur",
+      expect.any(Function)
+    );
   });
 });
