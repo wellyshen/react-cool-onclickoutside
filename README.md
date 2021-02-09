@@ -24,8 +24,8 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 - 🧻 Uses [passive event listeners](https://developers.google.com/web/tools/lighthouse/audits/passive-event-listeners) to improve scrolling performance.
 - ⛔ Scrollbar can be excluded from the callback of outside clicks.
 - 🙈 [Ignores certain elements](#ignore-elements-by-css-class-name) during the event loop.
-- 🪟 [Detects iframe clicks](#detecting-iframe-clicks) for better DX.
 - 🙉 Enables you to [stop listening for outside clicks](#disabling-the-event-listener) when needed.
+- 🪟 [Detects iframe clicks](#detecting-iframe-clicks) for better DX.
 - 🔩 Supports custom `refs` for [some reasons](#use-your-own-ref).
 - 📜 Supports [TypeScript](https://www.typescriptlang.org) type definition.
 - 🗄️ Server-side rendering compatibility.
