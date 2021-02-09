@@ -228,10 +228,6 @@ The `options` object contains the following keys.
 | `ignoreClass`      | string  | `ignore-onclickoutside`       | To ignore certain elements during the event loop by the CSS class name that you defined.                |
 | `detectIFrame`     | boolean | `true`                        | To disable the feature of [detecting iframe clicks](#detecting-iframe-clicks).                          |
 
-## Inspiration
-
-- [react-onclickoutside](https://github.com/Pomax/react-onclickoutside)
-
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
