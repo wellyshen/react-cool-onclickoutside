@@ -20,17 +20,11 @@ import {
 const App: FC = () => {
   const [openMenu, setOpenMenu] = useState<boolean>(false);
 
-  const handleBtnClick = () => {
-    setOpenMenu(!openMenu);
-  };
+  const handleBtnClick = () => setOpenMenu(!openMenu);
 
-  const closeMenu = () => {
-    setOpenMenu(false);
-  };
+  const closeMenu = () => setOpenMenu(false);
 
-  const ref = useOnclickOutside(() => {
-    closeMenu();
-  });
+  const ref = useOnclickOutside(() => closeMenu());
 
   return (
     <>
