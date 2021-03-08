@@ -43,9 +43,9 @@ const useOnclickOutside = (
   callback: Callback,
   {
     refs: refsOpt,
-    disabled = false,
+    disabled,
     eventTypes = ["mousedown", "touchstart"],
-    excludeScrollbar = false,
+    excludeScrollbar,
     ignoreClass = DEFAULT_IGNORE_CLASS,
     detectIFrame = true,
   }: Options = {}
@@ -66,16 +66,19 @@ const useOnclickOutside = (
     () => {
       if (!refsOpt?.length && !refsState.length) return;
 
-      const els: El[] = [];
-      (refsOpt || refsState).forEach(
-        ({ current }) => current && els.push(current)
-      );
+      const getEls = () => {
+        const els: El[] = [];
+        (refsOpt || refsState).forEach(
+          ({ current }) => current && els.push(current)
+        );
+        return els;
+      };
 
       const handler = (e: any) => {
         if (
           !hasIgnoreClass(e, ignoreClass) &&
           !(excludeScrollbar && clickedOnScrollbar(e)) &&
-          els.every((el) => !el.contains(e.target))
+          getEls().every((el) => !el.contains(e.target))
         )
           callbackRef.current(e);
       };
@@ -88,7 +91,7 @@ const useOnclickOutside = (
           if (
             activeElement?.tagName === "IFRAME" &&
             !hasIgnoreClass(activeElement, ignoreClass) &&
-            !els.includes(activeElement as HTMLIFrameElement)
+            !getEls().includes(activeElement as HTMLIFrameElement)
           )
             callbackRef.current(e);
         }, 0);
