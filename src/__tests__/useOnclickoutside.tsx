@@ -1,4 +1,4 @@
-import { FC, useRef } from "react";
+import { FC, useState, useRef } from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 
 import useOnclickOutside, { DEFAULT_IGNORE_CLASS, Callback, Options } from "..";
@@ -15,12 +15,14 @@ const Compo: FC<Props> = ({
   callback,
   ...options
 }: Props) => {
+  const [show, setShow] = useState(false);
   const ref1 = useRef<HTMLDivElement>();
   const ref2 = useRef<HTMLDivElement>();
+  const ref3 = useRef<HTMLDivElement>();
   const ref = useOnclickOutside(callback, {
     ...options,
     // @ts-expect-error
-    refs: refOpt && [ref1, ref2],
+    refs: refOpt && [ref1, ref2, ref3],
   });
 
   return (
@@ -31,6 +33,11 @@ const Compo: FC<Props> = ({
       <div data-testid="ref-2" ref={refOpt ? ref2 : ref}>
         <div data-testid="in-1" />
       </div>
+      {/* @ts-expect-error */}
+      {show && <div data-testid="ref-3" ref={ref3} />}
+      <button data-testid="btn" type="button" onClick={() => setShow(!show)}>
+        Toggle
+      </button>
       <div data-testid="out-1" />
       <div data-testid="out-2" className={className || DEFAULT_IGNORE_CLASS}>
         <div data-testid="out-3" />
@@ -120,6 +127,16 @@ describe("useOnclickOutside", () => {
       expect(cb).not.toHaveBeenCalled();
     }
   );
+
+  it("should not trigger callback when clicking/touching inside of the dynamic ref", () => {
+    const cb = renderHelper({ refOpt: true });
+
+    fireEvent.click(getByTestId("btn"));
+    fireEvent.mouseDown(getByTestId("ref-3"));
+    fireEvent.touchStart(getByTestId("ref-3"));
+
+    expect(cb).not.toHaveBeenCalled();
+  });
 
   it("should trigger callback when clicking/touching outside of the targets", () => {
     const cb = renderHelper();
