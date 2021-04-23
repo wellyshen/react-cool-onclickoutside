@@ -230,6 +230,12 @@ The `options` object contains the following keys.
 | `ignoreClass`      | string  | `ignore-onclickoutside`       | To ignore certain elements during the event loop by the CSS class name that you defined.                |
 | `detectIFrame`     | boolean | `true`                        | To disable the feature of [detecting iframe clicks](#detecting-iframe-clicks).                          |
 
+## Articles / Blog Posts
+
+> 💡 If you have written any blog post or article about `react-cool-onclickoutside`, please open a PR to add it here.
+
+- Featured on [React Status #172](https://react.statuscode.com/issues/172).
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
