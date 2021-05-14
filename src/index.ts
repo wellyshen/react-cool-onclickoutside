@@ -50,12 +50,9 @@ const useOnclickOutside = (
     detectIFrame = true,
   }: Options = {}
 ): Return => {
-  const callbackRef = useRef(callback);
   const [refsState, setRefsState] = useState<Refs>([]);
-
-  useEffect(() => {
-    callbackRef.current = callback;
-  }, [callback]);
+  const callbackRef = useRef(callback);
+  callbackRef.current = callback;
 
   const ref: Return = useCallback(
     (el) => setRefsState((prevState) => [...prevState, { current: el }]),
