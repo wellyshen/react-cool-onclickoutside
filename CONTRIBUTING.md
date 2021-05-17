@@ -20,7 +20,7 @@ Please note we have a [code of conduct](CODE_OF_CONDUCT.md), please follow it in
 
 After cloning REACT COOL ONCLICKOUTSIDE, run `yarn` to fetch its dependencies. Then, you can run several commands:
 
-- `yarn dev` runs the [demo app](https://github.com/wellyshen/react-cool-onclickoutside/tree/master/demo/App) as your playground at `localhost:10001`. Support live reloading.
+- `yarn dev` runs the [demo app](demo/App) as your playground at `localhost:10001`. Support live reloading.
 - `yarn lint:code` lints all `.js` and `.tsx?` files.
 - `yarn lint:type` runs the [TypeScript](https://www.typescriptlang.org) type-checks.
 - `yarn lint:style` lints all `.css` and `.tsx?` (for [Emotion](https://emotion.sh)) files.
