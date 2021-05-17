@@ -2,7 +2,7 @@
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
 
-Please note we have a [code of conduct](https://github.com/wellyshen/react-cool-onclickoutside/blob/master/CODE_OF_CONDUCT.md), please follow it in all your interactions with the project.
+Please note we have a [code of conduct](CODE_OF_CONDUCT.md), please follow it in all your interactions with the project.
 
 > Working on your first Pull Request? You can learn how from [this free video series](https://egghead.io/courses/how-to-contribute-to-an-open-source-project-on-github).
 
@@ -12,8 +12,8 @@ Please note we have a [code of conduct](https://github.com/wellyshen/react-cool-
 2. Run `yarn` to install dependencies.
 3. If you’ve fixed a bug or added code that should be tested.
 4. Ensure the test suite passes by running `yarn test`.
-5. Update the [README.md](https://github.com/wellyshen/react-cool-onclickoutside/blob/master/README.md) with details of changes to the interface.
-6. Update the [demo app](https://github.com/wellyshen/react-cool-onclickoutside/tree/master/demo/App) if needed.
+5. Update the [README.md](README.md) with details of changes to the interface.
+6. Update the [demo app](demo/App) if needed.
 7. Make sure your code lints by running `yarn lint`.
 
 ## Development Workflow
