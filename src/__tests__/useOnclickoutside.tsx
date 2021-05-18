@@ -88,15 +88,14 @@ describe("useOnclickOutside", () => {
     clientWidth: { value: 100 },
     clientHeight: { value: 100 },
   });
-  const { getByTestId } = screen;
 
   it.each(["method", "option"])(
     "should not trigger callback when clicking/touching inside of the target with ref(s) %s",
     (type) => {
       const cb = renderHelper({ refOpt: type === "option" });
-      const ref1 = getByTestId("ref-1");
-      const ref2 = getByTestId("ref-2");
-      const in1 = getByTestId("in-1");
+      const ref1 = screen.getByTestId("ref-1");
+      const ref2 = screen.getByTestId("ref-2");
+      const in1 = screen.getByTestId("in-1");
 
       fireEvent.mouseDown(ref1);
       fireEvent.touchStart(ref1);
@@ -118,8 +117,8 @@ describe("useOnclickOutside", () => {
       const cb = renderHelper({
         ignoreClass: type === "specified" ? "my-ignore-class" : undefined,
       });
-      const out2 = getByTestId("out-2");
-      const out3 = getByTestId("out-3");
+      const out2 = screen.getByTestId("out-2");
+      const out3 = screen.getByTestId("out-3");
 
       fireEvent.mouseDown(out2);
       fireEvent.mouseDown(out3);
@@ -131,16 +130,16 @@ describe("useOnclickOutside", () => {
   it("should not trigger callback when clicking/touching inside of the dynamic ref", () => {
     const cb = renderHelper({ refOpt: true });
 
-    fireEvent.click(getByTestId("btn"));
-    fireEvent.mouseDown(getByTestId("ref-3"));
-    fireEvent.touchStart(getByTestId("ref-3"));
+    fireEvent.click(screen.getByTestId("btn"));
+    fireEvent.mouseDown(screen.getByTestId("ref-3"));
+    fireEvent.touchStart(screen.getByTestId("ref-3"));
 
     expect(cb).not.toHaveBeenCalled();
   });
 
   it("should trigger callback when clicking/touching outside of the targets", () => {
     const cb = renderHelper();
-    const out = getByTestId("out-1");
+    const out = screen.getByTestId("out-1");
 
     fireEvent.mouseDown(out);
     fireEvent.touchStart(out);
@@ -150,7 +149,7 @@ describe("useOnclickOutside", () => {
 
   it("should trigger callback by the assign event type", () => {
     const cb = renderHelper({ eventTypes: ["mouseup"] });
-    const out = getByTestId("out-1");
+    const out = screen.getByTestId("out-1");
 
     fireEvent.mouseDown(out);
 
@@ -163,7 +162,7 @@ describe("useOnclickOutside", () => {
 
   it("should not trigger callback when event listener is disabled", () => {
     const cb = renderHelper({ disabled: true });
-    const out = getByTestId("out-1");
+    const out = screen.getByTestId("out-1");
 
     fireEvent.mouseDown(out);
     fireEvent.touchStart(out);
@@ -173,7 +172,7 @@ describe("useOnclickOutside", () => {
 
   it("should not trigger callback when clicking inside of the scrollbar", () => {
     const cb = renderHelper({ excludeScrollbar: true });
-    const out = getByTestId("out-1");
+    const out = screen.getByTestId("out-1");
 
     fireEvent.mouseDown(out, { clientX: 110 });
     fireEvent.mouseDown(out, { clientY: 110 });
@@ -183,7 +182,7 @@ describe("useOnclickOutside", () => {
 
   it("should trigger callback when clicking outside of the scrollbar", () => {
     const cb = renderHelper({ excludeScrollbar: true });
-    const out = getByTestId("out-1");
+    const out = screen.getByTestId("out-1");
 
     fireEvent.mouseDown(out, { clientX: 90 });
     fireEvent.mouseDown(out, { clientY: 90 });
@@ -200,19 +199,19 @@ describe("useOnclickOutside", () => {
 
     expect(cb).not.toHaveBeenCalled();
 
-    getByTestId("iframe-1").focus();
+    screen.getByTestId("iframe-1").focus();
     fireEvent(window, new Event("blur"));
     jest.runAllTimers();
 
     expect(cb).not.toHaveBeenCalled();
 
-    getByTestId("iframe-2").focus();
+    screen.getByTestId("iframe-2").focus();
     fireEvent(window, new Event("blur"));
     jest.runAllTimers();
 
     expect(cb).not.toHaveBeenCalled();
 
-    getByTestId("iframe-3").focus();
+    screen.getByTestId("iframe-3").focus();
     fireEvent(window, new Event("blur"));
     jest.runAllTimers();
 
@@ -222,7 +221,7 @@ describe("useOnclickOutside", () => {
   it('should disable "detectIFrame"', () => {
     window.addEventListener = jest.fn();
     renderHelper({ detectIFrame: false });
-    const iframe = getByTestId("iframe-1");
+    const iframe = screen.getByTestId("iframe-1");
     fireEvent.mouseDown(iframe);
 
     expect(window.addEventListener).not.toHaveBeenCalledWith(
