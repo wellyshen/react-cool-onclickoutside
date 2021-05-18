@@ -5,7 +5,7 @@ declare module "react-cool-onclickoutside" {
     (event: T): void;
   }
 
-  interface Options {
+  export interface Options {
     refs?: RefObject<HTMLElement>[];
     disabled?: boolean;
     eventTypes?: string[];
@@ -14,7 +14,7 @@ declare module "react-cool-onclickoutside" {
     detectIFrame?: boolean;
   }
 
-  interface Return {
+  export interface Return {
     (element: HTMLElement | null): void;
   }
 
