@@ -13,7 +13,7 @@ This is a React [hook](https://reactjs.org/docs/hooks-custom.html#using-a-custom
 [![npm version](https://img.shields.io/npm/v/react-cool-onclickoutside?style=flat-square)](https://www.npmjs.com/package/react-cool-onclickoutside)
 [![npm downloads](https://img.shields.io/npm/dm/react-cool-onclickoutside?style=flat-square)](https://www.npmtrends.com/react-cool-onclickoutside)
 [![npm downloads](https://img.shields.io/npm/dt/react-cool-onclickoutside?style=flat-square)](https://www.npmtrends.com/react-cool-onclickoutside)
-[![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-cool-onclickoutside?style=flat-square)](https://bundlephobia.com/result?p=react-cool-onclickoutside)
+[![gzip size](https://badgen.net/bundlephobia/minzip/react-cool-onclickoutside?label=gzip%20size&style=flat-square)](https://bundlephobia.com/result?p=react-cool-onclickoutside)
 [![MIT licensed](https://img.shields.io/github/license/wellyshen/react-cool-onclickoutside?style=flat-square)](https://raw.githubusercontent.com/wellyshen/react-cool-onclickoutside/master/LICENSE)
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange?style=flat-square)](#contributors-)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](CONTRIBUTING.md)
