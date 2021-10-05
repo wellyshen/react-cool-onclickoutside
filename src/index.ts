@@ -14,18 +14,25 @@ export interface Options {
   disabled?: boolean;
   eventTypes?: string[];
   excludeScrollbar?: boolean;
-  ignoreClass?: string;
+  ignoreClass?: string | string[];
   detectIFrame?: boolean;
 }
 interface Return {
   (element: El | null): void;
 }
 
-const hasIgnoreClass = (e: any, ignoreClass: string): boolean => {
+const hasIgnoreClass = (e: any, ignoreClass: string | string[]): boolean => {
   let el = e.target || e;
 
   while (el) {
-    if (el.classList?.contains(ignoreClass)) return true;
+    if (Array.isArray(ignoreClass)) {
+      for (let i = 0, c = ignoreClass[i]; i < ignoreClass.length; i += 1) {
+        if (el.classList?.contains(c)) return true;
+      }
+    } else if (el.classList?.contains(ignoreClass)) {
+      return true;
+    }
+
     el = el.parentElement;
   }
 
