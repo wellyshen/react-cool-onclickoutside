@@ -21,15 +21,17 @@ interface Return {
   (element: El | null): void;
 }
 
+const checkClass = (el: HTMLElement, cl: string): boolean =>
+  el.classList?.contains(cl);
+
 const hasIgnoreClass = (e: any, ignoreClass: string | string[]): boolean => {
   let el = e.target || e;
 
   while (el) {
     if (Array.isArray(ignoreClass)) {
-      for (let i = 0, c = ignoreClass[i]; i < ignoreClass.length; i += 1) {
-        if (el.classList?.contains(c)) return true;
-      }
-    } else if (el.classList?.contains(ignoreClass)) {
+      // eslint-disable-next-line no-loop-func
+      if (ignoreClass.some((c) => checkClass(el, c))) return true;
+    } else if (checkClass(el, ignoreClass)) {
       return true;
     }
 
