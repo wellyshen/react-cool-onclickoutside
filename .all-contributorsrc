@@ -33,6 +33,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "cherepanov",
+      "name": "Alexey Cherepanov",
+      "avatar_url": "https://avatars.githubusercontent.com/u/876145?v=4",
+      "profile": "https://github.com/cherepanov",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
