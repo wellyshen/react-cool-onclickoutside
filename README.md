@@ -129,7 +129,9 @@ const App = () => {
     () => {
       // Do something...
     },
-    { ignoreClass: "my-ignore-class" }
+    {
+      ignoreClass: "my-ignore-class", // Or ["class-1", "class-2"]
+    }
   );
 
   return (
@@ -218,14 +220,14 @@ const callback = (event) => {
 
 The `options` object contains the following keys.
 
-| Key                | Type    | Default                       | Description                                                                                             |
-| ------------------ | ------- | ----------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `refs`             | Array   |                               | For [some reasons](#use-your-own-ref), you can pass in your own `ref(s)` instead of using the built-in. |
-| `disabled`         | boolean | `false`                       | Enable/disable the event listener.                                                                      |
-| `eventTypes`       | Array   | `['mousedown', 'touchstart']` | Which events to listen for.                                                                             |
-| `excludeScrollbar` | boolean | `false`                       | Whether or not to listen (ignore) to browser scrollbar clicks.                                          |
-| `ignoreClass`      | string  | `ignore-onclickoutside`       | To ignore certain elements during the event loop by the CSS class name that you defined.                |
-| `detectIFrame`     | boolean | `true`                        | To disable the feature of [detecting iframe clicks](#detecting-iframe-clicks).                          |
+| Key                | Type               | Default                       | Description                                                                                             |
+| ------------------ | ------------------ | ----------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `refs`             | Array              |                               | For [some reasons](#use-your-own-ref), you can pass in your own `ref(s)` instead of using the built-in. |
+| `disabled`         | boolean            | `false`                       | Enable/disable the event listener.                                                                      |
+| `eventTypes`       | Array              | `['mousedown', 'touchstart']` | Which events to listen for.                                                                             |
+| `excludeScrollbar` | boolean            | `false`                       | Whether or not to listen (ignore) to browser scrollbar clicks.                                          |
+| `ignoreClass`      | string \| string[] | `ignore-onclickoutside`       | To ignore certain elements during the event loop by the CSS class name that you defined.                |
+| `detectIFrame`     | boolean            | `true`                        | To disable the feature of [detecting iframe clicks](#detecting-iframe-clicks).                          |
 
 ## Articles / Blog Posts
 
