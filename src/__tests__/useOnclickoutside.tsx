@@ -127,6 +127,22 @@ describe("useOnclickOutside", () => {
     }
   );
 
+  it.each(["default", ["class1", "class2"]])(
+    "should not trigger callback when clicking an element with some of %s ignore classes",
+    (type) => {
+      const cb = renderHelper({
+        ignoreClass: type === "default" ? undefined : type,
+      });
+      const out2 = screen.getByTestId("out-2");
+      const out3 = screen.getByTestId("out-3");
+
+      fireEvent.mouseDown(out2);
+      fireEvent.mouseDown(out3);
+
+      expect(cb).not.toHaveBeenCalled();
+    }
+  );
+
   it("should not trigger callback when clicking/touching inside of the dynamic ref", () => {
     const cb = renderHelper({ refOpt: true });
 

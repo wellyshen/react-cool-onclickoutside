@@ -14,18 +14,27 @@ export interface Options {
   disabled?: boolean;
   eventTypes?: string[];
   excludeScrollbar?: boolean;
-  ignoreClass?: string;
+  ignoreClass?: string | string[];
   detectIFrame?: boolean;
 }
 interface Return {
   (element: El | null): void;
 }
 
-const hasIgnoreClass = (e: any, ignoreClass: string): boolean => {
+const checkClass = (el: HTMLElement, cl: string): boolean =>
+  el.classList?.contains(cl);
+
+const hasIgnoreClass = (e: any, ignoreClass: string | string[]): boolean => {
   let el = e.target || e;
 
   while (el) {
-    if (el.classList?.contains(ignoreClass)) return true;
+    if (Array.isArray(ignoreClass)) {
+      // eslint-disable-next-line no-loop-func
+      if (ignoreClass.some((c) => checkClass(el, c))) return true;
+    } else if (checkClass(el, ignoreClass)) {
+      return true;
+    }
+
     el = el.parentElement;
   }
 
