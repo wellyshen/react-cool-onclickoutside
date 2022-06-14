@@ -2,7 +2,7 @@ import canUsePassiveEvents from "../canUsePassiveEvents";
 
 describe("canUsePassiveEvents", () => {
   it("should get false in ssr", () => {
-    // @ts-expect-error
+    // @ts-ignore
     window.addEventListener = undefined;
 
     expect(canUsePassiveEvents()).toBeFalsy();
@@ -13,7 +13,7 @@ describe("canUsePassiveEvents", () => {
   });
 
   it("should get true when support passive events", () => {
-    // @ts-expect-error
+    // @ts-ignore
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     window.addEventListener = jest.fn((e, cb, { passive }) => null);
 

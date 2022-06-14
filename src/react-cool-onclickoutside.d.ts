@@ -1,5 +1,5 @@
 declare module "react-cool-onclickoutside" {
-  import { RefObject } from "react";
+  import type { RefObject } from "react";
 
   export interface Callback<T extends Event = Event> {
     (event: T): void;

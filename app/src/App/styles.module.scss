@@ -1,0 +1,110 @@
+@import "../mixins/mq.scss";
+
+body {
+  font-family: Roboto, sans-serif;
+
+  h1 {
+    font-family: "Bungee Shade", cursive;
+  }
+}
+
+.container {
+  padding: 5rem 5%;
+  text-align: center;
+
+  @include sm {
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+
+  @include md {
+    padding-left: 12.5%;
+    padding-right: 12.5%;
+  }
+
+  @include lg {
+    padding-left: 15%;
+    padding-right: 15%;
+  }
+
+  .title {
+    margin: 0 0 1rem;
+    font-size: 8vw;
+
+    @include md {
+      font-size: 4vw;
+    }
+  }
+
+  .subtitle {
+    margin: 0 0 5rem;
+    font-size: 3vw;
+
+    @include md {
+      font-size: 1.5vw;
+    }
+  }
+
+  .dropdown {
+    display: inline-block;
+    position: relative;
+    font-size: 1.25rem;
+    user-select: none;
+  }
+
+  .dropdown-btn {
+    padding: 1rem 2rem;
+    border: none;
+    line-height: 1.5;
+    color: #fff;
+    background: #000;
+    cursor: pointer;
+    transition: background 0.15s ease;
+
+    &:hover {
+      background: #333;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 5px rgb(130 138 145 / 50%);
+    }
+
+    &::after {
+      content: "";
+      display: inline-block;
+      margin-left: 1rem;
+      vertical-align: 0.25rem;
+      border-top: 0.5rem solid;
+      border-right: 0.5rem solid transparent;
+      border-bottom: 0;
+      border-left: 0.5rem solid transparent;
+    }
+  }
+
+  .dropdown-menu {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    border: 10px solid #333;
+    text-align: left;
+    background: #333;
+    transform: translate3d(0, 73px, 0);
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+
+  .dropdown-item {
+    display: block;
+    padding: 1rem 2rem;
+    color: #fff;
+    line-height: 1.5;
+    text-decoration: none;
+
+    &:hover {
+      color: #000;
+      background: #fff;
+    }
+  }
+}

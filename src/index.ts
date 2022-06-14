@@ -1,4 +1,5 @@
-import { RefObject, useRef, useState, useEffect, useCallback } from "react";
+import type { RefObject } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 
 import canUsePassiveEvents from "./canUsePassiveEvents";
 
@@ -104,7 +105,7 @@ const useOnclickOutside = (
 
       const removeEventListener = () => {
         eventTypes.forEach((type) =>
-          // @ts-expect-error
+          // @ts-ignore
           document.removeEventListener(type, handler, getEventOptions(type))
         );
 

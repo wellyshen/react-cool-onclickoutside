@@ -1,4 +1,5 @@
-import { FC, useState, useRef } from "react";
+import type { FC } from "react";
+import { useState, useRef } from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 
 import useOnclickOutside, { DEFAULT_IGNORE_CLASS, Callback, Options } from "..";
@@ -21,19 +22,19 @@ const Compo: FC<Props> = ({
   const ref3 = useRef<HTMLDivElement>();
   const ref = useOnclickOutside(callback, {
     ...options,
-    // @ts-expect-error
+    // @ts-ignore
     refs: refOpt && [ref1, ref2, ref3],
   });
 
   return (
     <>
-      {/* @ts-expect-error */}
+      {/* @ts-ignore */}
       <div data-testid="ref-1" ref={refOpt ? ref1 : ref} />
-      {/* @ts-expect-error */}
+      {/* @ts-ignore */}
       <div data-testid="ref-2" ref={refOpt ? ref2 : ref}>
         <div data-testid="in-1" />
       </div>
-      {/* @ts-expect-error */}
+      {/* @ts-ignore */}
       {show && <div data-testid="ref-3" ref={ref3} />}
       <button data-testid="btn" type="button" onClick={() => setShow(!show)}>
         Toggle
